@@ -38,8 +38,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void authorizeSpotify() {
-        editor.remove("token");
-        editor.apply();
         final AuthorizationRequest request = new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI)
                 .setScopes(new String[]{SCOPES})
                 .setShowDialog(true)

@@ -4,17 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".StartActivity">
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login with Spotify"
+        android:layout_width="279dp"
+        android:layout_height="48dp"
+        android:background="@drawable/roundbutton"
+        android:drawableLeft="@drawable/spotify_icon_wrapper"
+        android:fontFamily="@font/circular_spotifytext_bold"
+        android:text="@string/log_in_with_spotify"
+        android:textColorLink="@color/spotifyGreen"
+        android:textSize="13sp"
+        app:backgroundTint="@color/spotifyGreen"
+        app:iconPadding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.579" />
+
+    <TextView
+        android:id="@+id/SpotifyWrapped"
+        android:layout_width="287dp"
+        android:layout_height="164dp"
+        android:fontFamily="@font/circular_spotifytext_bold"
+        android:text="@string/spotify_wrapped"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_new_account"
+        android:fontFamily="@font/circular_spotifytext_black"
+        android:textColor="@color/white"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662"
+        android:focusable="true" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

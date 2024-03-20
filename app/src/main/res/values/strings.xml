@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">SpotifyWrapped</string>
+    <string name="log_in_with_spotify">Log in with Spotify</string>
+    <string name="spotify_wrapped">Spotify Wrapped</string>
+    <string name="create_new_account">Or create new account</string>
     <string name="title_wrap">Your Wrap</string>
     <string name="title_history">History</string>
 </resources>

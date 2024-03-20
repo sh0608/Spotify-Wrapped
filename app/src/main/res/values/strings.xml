@@ -5,4 +5,9 @@
     <string name="create_new_account">Or create new account</string>
     <string name="title_wrap">Your Wrap</string>
     <string name="title_history">History</string>
+    <string name="view_past_wraps">View Past Wraps</string>
+    <string name="genres">Genres</string>
+    <string name="save_my_wrap">Save my wrap</string>
+    <string name="favorite_songs">Favorite Songs</string>
+    <string name="top_artists">Top Artists</string>
 </resources>

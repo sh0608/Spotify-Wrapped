@@ -9,6 +9,6 @@
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="blah" />
+        android:title="@string/view_past_wraps" />
 
 </menu>

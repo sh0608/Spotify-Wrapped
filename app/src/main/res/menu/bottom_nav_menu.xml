@@ -4,11 +4,11 @@
     <item
         android:id="@+id/navigation_wrap"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="blah" />
+        android:title="Home" />
 
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="blah" />
+        android:title="Update Account Info" />
 
 </menu>

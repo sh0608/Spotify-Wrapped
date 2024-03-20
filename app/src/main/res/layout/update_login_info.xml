@@ -8,54 +8,57 @@
     android:background="#000000" >
 
 
-    <!-- should link to https://www.spotify.com/us/account/profile/-->
-
-    <!--  UPDATE LOGIN INFO  -->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/update_login_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Login Info"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:fontFamily="@font/circular_spotifytext_bold"
+        android:text="@string/update_login_info"
+        android:textColor="@color/white"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintVertical_bias="0.362" />
+
+
+
+    <!-- should link to https://www.spotify.com/us/account/profile/-->
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/change_username_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Username or Email"
-        android:backgroundTint="#1DB954"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:text="@string/change_username_or_email"
+        android:textColor="@color/white"
+        android:fontFamily="@font/circular_spotify"
+        android:backgroundTint="@color/spotifyGreen"
+        app:layout_constraintBottom_toTopOf="@+id/change_password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/update_login_textview"
         app:layout_constraintVertical_bias="0.815" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/change_password_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="216dp"
-        android:text="Change Password"
-        android:backgroundTint="#1DB954"
+        android:text="@string/change_password"
+        android:textColor="@color/white"
+        android:fontFamily="@font/circular_spotify"
+        android:backgroundTint="@color/spotifyGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/update_login_textview"
         app:layout_constraintVertical_bias="0.642" />
 
 
-    <!--  Update Username or Email  -->
 
-
-    <!--  Update Password  -->
 
 
 

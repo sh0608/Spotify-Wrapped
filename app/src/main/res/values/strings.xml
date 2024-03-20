@@ -11,8 +11,10 @@
     <string name="title_wrap">Your Wrap</string>
     <string name="title_history">History</string>
 
-    <!--  update_login_info.xml  -->
-    <string name="update_login_info">Update Login Info</string>
+    <!--  update_account_info.xml  -->
+    <string name="update_account_info">Update Account Info</string>
     <string name="change_password">Change Password</string>
     <string name="change_username_or_email">Change Username or Email</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="spotify_icon">spotify icon</string>
 </resources>

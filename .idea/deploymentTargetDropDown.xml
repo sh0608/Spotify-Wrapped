@@ -2,11 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-
+      <entry key="MainActivity">
+        <State />
+      </entry>
       <entry key="StartActivity">
-
-<!--       <entry key="app"> -->
-
         <State>
           <targetSelectedWithDropDown>
             <Target>
@@ -14,20 +13,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-
                   <value value="$USER_HOME$/.android/avd/Pixel_7_Pro_API_UpsideDownCakePrivacySandbox.avd" />
-
-<!--                   <value value="C:\Users\soyoo\.android\avd\Pixel_7_Pro_API_UpsideDownCakePrivacySandbox.avd" /> -->
-
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-
           <timeTargetWasSelectedWithDropDown value="2024-03-20T00:11:45.250472Z" />
-
-<!--           <timeTargetWasSelectedWithDropDown value="2024-03-19T20:56:36.994316100Z" /> -->
-
         </State>
       </entry>
     </value>

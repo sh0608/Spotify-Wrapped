@@ -2,15 +2,45 @@
     <!-- Base application theme. -->
     <style name="Theme.SpotifyWrapped" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/spotifyGreen</item>
+        <item name="colorPrimaryVariant">@color/teal_200</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SCREEN">
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="BUTTON">
+        <item name="backgroundTint">@color/spotifyGreen</item>
+    </style>
+
+    <style name="DELETE_ACCOUNT_BUTTON">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/dark_gray</item>
+    </style>
+
+    <style name="SWITCH">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="IMAGE">
+        <item name="android:src">@drawable/spotify_icon_white_circle</item>
+    </style>
+
+    <style name="THEME_IMAGE">
+        <item name="android:src">@drawable/dark_mode</item>
+    </style>
+
 </resources>

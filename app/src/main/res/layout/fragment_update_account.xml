@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black" >
+    style="@style/SCREEN" >
 
 
     <!-- should link to https://www.spotify.com/us/account/profile/-->
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/circular_spotifytext_bold"
         android:text="@string/update_account_info"
-        android:textColor="@color/white"
+        style="@style/TEXT"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,10 +56,11 @@
         app:layout_constraintVertical_bias="0.609" />
 
     <ImageView
+
         android:layout_width="135dp"
         android:layout_height="110dp"
         android:contentDescription="@string/spotify_icon"
-        android:src="@drawable/spotify_icon"
+        style="@style/IMAGE"
         app:layout_constraintBottom_toTopOf="@+id/update_login_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,11 +68,11 @@
         app:layout_constraintVertical_bias="0.638" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/delete_account_button"
+        style="@style/DELETE_ACCOUNT_BUTTON"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:backgroundTint="@color/black"
         android:fontFamily="@font/circular_spotifytext_black"
         android:text="@string/delete_account"
         android:textSize="11sp"

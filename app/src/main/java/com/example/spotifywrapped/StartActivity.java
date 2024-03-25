@@ -1,6 +1,10 @@
 package com.example.spotifywrapped;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.spotifywrapped.databinding.ActivityStartBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;

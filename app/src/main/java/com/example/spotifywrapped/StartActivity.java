@@ -17,7 +17,7 @@ public class StartActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
-    private static final String CLIENT_ID = "b0e28dce674d447987867d662ef7e1c9";
+    protected static final String CLIENT_ID = "b0e28dce674d447987867d662ef7e1c9";
     private static final String REDIRECT_URI = "com.example.spotifywrapped://callback";
     private static final String SCOPES = "user-read-recently-played,user-read-private";
     private ActivityStartBinding binding;

@@ -2,15 +2,15 @@ package com.example.spotifywrapped;
 
 public class Song {
     private String name;
-    private String artist;
+    private String[] artists;
     private String imageUrl;
-    private Album album;
+    private String albumName;
 
-    public Song(String name, String artist, String imageUrl, Album album) {
+    public Song(String name, String[] artists, String imageUrl, String albumName) {
         this.name = name;
-        this.artist = artist;
+        this.artists = artists;
         this.imageUrl = imageUrl;
-        this.album = album;
+        this.albumName = albumName;
     }
 
     // Getters
@@ -18,15 +18,15 @@ public class Song {
         return name;
     }
 
-    public String getArtist() {
-        return artist;
+    public String[] getArtists() {
+        return artists;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public Album getAlbum() {
-        return album;
+    public String getAlbum() {
+        return albumName;
     }
 }

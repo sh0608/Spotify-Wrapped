@@ -19,13 +19,10 @@ public class SpotifyApiHelper {
 
         // Extracting artists
         JSONArray artistsArray = trackJson.getJSONArray("artists");
-        String artist = "";
+        String[] artists = new String[6];
         for (int i = 0; i < artistsArray.length(); i++) {
             JSONObject artistObject = artistsArray.getJSONObject(i);
-            if (i > 0) {
-                artist += ", ";
-            }
-            artist += artistObject.getString("name");
+            artists[i] = artistObject.getString("name");
         }
 
         // Extracting album
@@ -41,7 +38,7 @@ public class SpotifyApiHelper {
         }
 
         // Constructing Song object
-        return new Song(name, artist, imageUrl, new Album(albumName, artist, imageUrl, null));
+        return new Song(name, artists, imageUrl, albumName);
     }
     public static List<Song> getUserTopSongs(String accessToken) throws IOException, JSONException {
         List<Song> topSongs = new ArrayList<>();

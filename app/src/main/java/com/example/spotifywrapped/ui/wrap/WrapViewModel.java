@@ -10,7 +10,7 @@ public class WrapViewModel extends ViewModel {
 
     public WrapViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is wrap fragment");
     }
 
     public LiveData<String> getText() {

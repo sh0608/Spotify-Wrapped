@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/icon_wrapper"
-        android:drawable="@drawable/spotify_icon"
+        android:drawable="@drawable/spotify_icon_white_circle"
         android:width="40dp"
         android:height="40dp"
         android:bottom="8dp"

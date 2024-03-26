@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
         android:id="@+id/navigation_wrap"
         android:icon="@drawable/ic_home_black_24dp"
@@ -9,9 +8,7 @@
 
     <item
         android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/view_past_wraps" />
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/baseline_access_time_24"
         android:title="@string/history" />
 
     <item

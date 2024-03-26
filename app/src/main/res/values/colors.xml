@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="offwhite">#ADADAD</color>
     <color name="spotifyGreen">#1ED760</color>
-
+    <color name="offSpotifyGreen">#117E37</color>
+    <color name="dark_gray">#1B1E22</color>
 
 </resources>

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
         topSongTitleTextView.setText(song.getName());
         TextView topSongArtistNameTextView = holder.topSongArtistNameTextView;
         topSongArtistNameTextView.setText(Arrays.toString(song.getArtists()).replaceAll("\\[|\\]", ""));
+        TextView topSongAlbumTitleTextView = holder.topSongAlbumTitleTextView;
+        topSongAlbumTitleTextView.setText(song.getAlbum());
 
     }
 
@@ -53,12 +57,14 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView topSongTitleTextView;
         public TextView topSongArtistNameTextView;
+        public TextView topSongAlbumTitleTextView;
 
 
         public ViewHolder(View itemView) {
             super (itemView);
             topSongTitleTextView = (TextView) itemView.findViewById(R.id.topSongTitle);
             topSongArtistNameTextView = (TextView) itemView.findViewById(R.id.topSongArtistName);
+            topSongAlbumTitleTextView = (TextView) itemView.findViewById(R.id.topSongAlbumTitle);
         }
     }
 }

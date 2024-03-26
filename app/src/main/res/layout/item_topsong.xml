@@ -22,19 +22,28 @@
         <TextView
             android:id="@+id/topSongTitle"
             android:textSize = "25sp"
-            android:text="Hello World"
+            android:text="All too Well"
             android:fontFamily="@font/circular_spotifytext_black"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="41dp" />
 
         <TextView
+            android:id="@+id/topSongAlbumTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circular_spotifytext_black"
+            android:text="Red"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+        <TextView
             android:id="@+id/topSongArtistName"
-            android:textSize = "12sp"
-            android:text = "hello world"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="12sp"
+            android:text="Taylor Swift" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

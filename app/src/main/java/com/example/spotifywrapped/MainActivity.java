@@ -3,6 +3,7 @@ package com.example.spotifywrapped;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.example.spotifywrapped.databinding.ActivityMainBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.wrap.TopSongAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spotifywrapped.databinding.ActivityMainBinding;
 
 import org.json.JSONException;
 
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         TopSongAdapter adapter = new TopSongAdapter(topSongs);
         topSongsRecyclerView.setAdapter(adapter);
         topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
     }
 

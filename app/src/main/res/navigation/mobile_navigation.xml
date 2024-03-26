@@ -8,13 +8,19 @@
     <fragment
         android:id="@+id/navigation_wrap"
         android:name="com.example.spotifywrapped.ui.wrap.WrapFragment"
-        android:label="blah"
-        tools:layout="@layout/fragment_wrap" />
+        android:label="Spotify Wrapped"
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.example.spotifywrapped.ui.history.HistoryFragment"
-        android:label="blah"
+        android:name="com.example.spotifywrapped.ui.wrap.WrapFragment"
+        android:label="Wrapped History"
         tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/navigation_update"
+        android:name="com.example.spotifywrapped.ui.update_account.UpdateAccount"
+        android:label="Update Account Information"
+        tools:layout="@layout/fragment_update_account" />
 
 </navigation>

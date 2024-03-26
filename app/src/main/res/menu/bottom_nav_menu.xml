@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
         android:id="@+id/navigation_wrap"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="blah" />
+        android:title="@string/wrapped" />
 
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/view_past_wraps" />
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/history" />
+
+    <item
+        android:id="@+id/navigation_update"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="@string/update_account_info_navbar" />
 
 </menu>

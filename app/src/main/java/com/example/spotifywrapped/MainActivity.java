@@ -1,10 +1,11 @@
 package com.example.spotifywrapped;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
-import com.example.spotifywrapped.ui.genre.GenreModel;
+import com.example.spotifywrapped.ui.SpotifyApiHelper;
+import com.example.spotifywrapped.ui.wrap.TopSongAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private ArrayList<GenreModel> genreList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+
+        // populating topSong RecyclerView
+        RecyclerView topSongsRecyclerView = findViewById(R.id.favoriteSongList);
+        List<Song> topSongs;
+        try {
+            topSongs = SpotifyApiHelper.getUserTopSongs("hello world");
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+        TopSongAdapter adapter = new TopSongAdapter(topSongs);
+        topSongsRecyclerView.setAdapter(adapter);
+        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 

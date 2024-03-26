@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="SCREEN">
+    <style name="SCREEN_BACKGROUND">
         <item name="android:background">@color/black</item>
     </style>
 
@@ -35,12 +35,9 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="IMAGE">
-        <item name="android:src">@drawable/spotify_icon_white_circle</item>
-    </style>
 
     <style name="THEME_IMAGE">
-        <item name="android:src">@drawable/dark_mode</item>
+        <item name="android:src">@drawable/mode_dark</item>
     </style>
 
 </resources>

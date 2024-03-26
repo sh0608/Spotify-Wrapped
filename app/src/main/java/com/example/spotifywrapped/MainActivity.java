@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // NAV BAR SETUP
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
+        // THEME SWITCHER SETUP
         theme_switch = findViewById(R.id.switch_theme);
         sharedPreferences = getSharedPreferences("night", 0);
         Boolean switch_theme_flag = sharedPreferences.getBoolean("night_mode", true);

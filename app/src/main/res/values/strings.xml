@@ -1,5 +1,26 @@
 <resources>
+    <!--  AndroidManifest.xml  -->
     <string name="app_name">SpotifyWrapped</string>
+
+    <!--  activity_start.xml  -->
+    <string name="log_in_with_spotify">Log in with Spotify</string>
+    <string name="spotify_wrapped">Spotify Wrapped</string>
+    <string name="create_new_account">Or create new account</string>
+
+    <!--  fragment_wrap.xml  -->
     <string name="title_wrap">Your Wrap</string>
     <string name="title_history">History</string>
+
+    <!--  fragment_update_account.xml  -->
+    <string name="update_account_info">Update Account Info</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_username_or_email">Change Username or Email</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="spotify_icon">spotify icon</string>
+
+    <!--  navbar  -->
+    <string name="home">Home</string>
+    <string name="update_account_info_navbar">Update Account Info</string>
+    <string name="wrapped">Wrapped</string>
+    <string name="history">History</string>
 </resources>

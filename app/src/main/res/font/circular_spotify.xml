@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_black" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_blackitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_bold" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_book" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_bookitalic" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_medium" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/circular_spotifytext_mediumitalic" />
+</font-family>

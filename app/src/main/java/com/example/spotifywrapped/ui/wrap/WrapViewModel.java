@@ -13,6 +13,11 @@ public class WrapViewModel extends ViewModel {
         mText.setValue("This is home fragment");
     }
 
+    public void updateText(String text) {
+
+        mText.setValue(text);
+    }
+
     public LiveData<String> getText() {
         return mText;
     }

@@ -51,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         // populating topSong RecyclerView
-        RecyclerView topSongsRecyclerView = findViewById(R.id.favoriteSongList);
-        List<Song> topSongs;
-        try {
-            topSongs = SpotifyApiHelper.getUserTopSongs("hello world");
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
-        TopSongAdapter adapter = new TopSongAdapter(topSongs);
-        topSongsRecyclerView.setAdapter(adapter);
-        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        RecyclerView topSongsRecyclerView = findViewById(R.id.favoriteSongList);
+//        List<Song> topSongs;
+//        try {
+//            topSongs = SpotifyApiHelper.getUserTopSongs("hello world");
+//        } catch (IOException | JSONException e) {
+//            throw new RuntimeException(e);
+//        }
+//        TopSongAdapter adapter = new TopSongAdapter(topSongs);
+//        topSongsRecyclerView.setAdapter(adapter);
+//        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // THEME SWITCHER SETUP
         theme_switch = findViewById(R.id.switch_theme);

@@ -77,7 +77,7 @@ public class SpotifyApiHelper {
     public static void getUserTopSongs(String accessToken, OnSongsLoadedListener listener) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(API_BASE_URL + "me/top/tracks")
+                .url(API_BASE_URL + "me/top/tracks") // ?time_range=short_term&limit=5&offset=0
                 .addHeader("Authorization", "Bearer " + accessToken)
                 .build();
 
@@ -134,4 +134,8 @@ public class SpotifyApiHelper {
 
         return topSongs;
     }
+
+    // top artists
+
+    // top playlists
 }

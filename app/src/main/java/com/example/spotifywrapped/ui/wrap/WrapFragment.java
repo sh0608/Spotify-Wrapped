@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.spotifywrapped.Song;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class WrapFragment extends Fragment {
 
-    private FragmentWrapBinding  binding;
+    private FragmentWrapBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class WrapFragment extends Fragment {
                     songList.append(song.getName()).append("\n");
                 }
                 wrapViewModel.updateText(songList.toString());
+                wrapViewModel.updateSongsList(songs);
             }
 
             @Override
@@ -75,7 +77,16 @@ public class WrapFragment extends Fragment {
 //            wrapViewModel.updateText("Error: cannot access top songs.");
 //        }
 
+        // initialize adapter + recyclerview
         wrapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
+            @Override
+            public void onChanged(List<Song> songs) {
+                // set adapter list to songs
+            }
+        });
+
+        // repeat for artists and playlists
         return root;
     }
 

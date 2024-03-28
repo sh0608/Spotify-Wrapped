@@ -13,4 +13,30 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    
+    <style name="SCREEN_BACKGROUND">
+        <item name="android:background">@color/white</item>
+    </style>
+    
+    <style name="TEXT">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="BUTTON">
+        <item name="backgroundTint">@color/offSpotifyGreen</item>
+    </style>
+
+    <style name="DELETE_ACCOUNT_BUTTON">
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+    
+    <style name="SWITCH">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="THEME_IMAGE">
+        <item name="android:src">@drawable/mode_light</item>
+    </style>
+
 </resources>

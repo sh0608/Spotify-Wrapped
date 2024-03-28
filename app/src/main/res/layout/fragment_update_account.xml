@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black" >
+    style="@style/SCREEN_BACKGROUND" >
 
-
-    <!-- should link to https://www.spotify.com/us/account/profile/-->
 
     <TextView
         android:id="@+id/update_login_textview"
+        style="@style/TEXT"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:fontFamily="@font/circular_spotifytext_bold"
         android:text="@string/update_account_info"
-        android:textColor="@color/white"
         android:textSize="35sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -27,12 +28,18 @@
 
     <Button
         android:id="@+id/change_username_button"
-        android:layout_width="285dp"
-        android:layout_height="60dp"
+
+        android:layout_width="250dp"
+        android:layout_height="62dp"
+        android:textSize="13sp"
+
+
         android:backgroundTint="@color/spotifyGreen"
-        android:fontFamily="@font/circular_spotify"
+
         android:text="@string/change_username_or_email"
         android:textColor="@color/white"
+        android:fontFamily="@font/circular_spotify"
+
         app:layout_constraintBottom_toTopOf="@+id/change_password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,13 +48,18 @@
 
     <Button
         android:id="@+id/change_password_button"
-        android:layout_width="205dp"
+
+        android:layout_width="250dp"
         android:layout_height="62dp"
         android:layout_marginBottom="216dp"
+
         android:backgroundTint="@color/spotifyGreen"
-        android:fontFamily="@font/circular_spotify"
+
         android:text="@string/change_password"
+        android:fontFamily="@font/circular_spotify"
         android:textColor="@color/white"
+        android:textSize="14sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -56,10 +68,13 @@
         app:layout_constraintVertical_bias="0.609" />
 
     <ImageView
+        android:src="@drawable/transparent"
         android:layout_width="135dp"
         android:layout_height="110dp"
+
+
         android:contentDescription="@string/spotify_icon"
-        android:src="@drawable/spotify_icon"
+
         app:layout_constraintBottom_toTopOf="@+id/update_login_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,14 +82,18 @@
         app:layout_constraintVertical_bias="0.638" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:backgroundTint="@color/black"
-        android:fontFamily="@font/circular_spotifytext_black"
+        android:id="@+id/delete_account_button"
+        style="@style/DELETE_ACCOUNT_BUTTON"
+
+
+        android:layout_width="250dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="30dp"
+
         android:text="@string/delete_account"
-        android:textSize="11sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/circular_spotifytext_black"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"

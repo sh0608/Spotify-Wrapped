@@ -5,23 +5,119 @@
     style="@style/SCREEN_BACKGROUND"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@color/black"
     tools:context=".ui.wrap.WrapFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        style="@style/TEXT"
 
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="627dp"
+        app:layout_constraintBottom_toBottomOf="@id/button_saveMyWrap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/topAlbums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/top_albums"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="228dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/top_albums"
+
+                app:layout_constraintBottom_toTopOf="@+id/nav_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favoriteSong"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/favoriteSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/favorite_songs"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="453dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoriteSongList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topArtists" />
+
+            <TextView
+                android:id="@+id/topArtists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/top_artists"
+                android:textColor="@color/white"
+
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favoriteSongList" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topArtistsList"
+                android:layout_width="match_parent"
+                android:layout_height="233dp"
+                app:layout_constraintBottom_toTopOf="@+id/favoriteSong"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topAlbums"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_saveMyWrap"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-
-        android:textAlignment="center"
-        android:textSize="20sp"
-
+        android:background="@drawable/roundbutton"
+        android:fontFamily="@font/circular_spotifytext_black"
+        android:text="@string/save_my_wrap"
+        android:textColorLink="@color/spotifyGreen"
+        android:textSize="14sp"
+        app:backgroundTint="@color/spotifyGreen"
+        app:iconPadding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="1.0" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

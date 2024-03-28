@@ -24,7 +24,6 @@ public class WrapFragment extends Fragment {
         binding = FragmentWrapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
         wrapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

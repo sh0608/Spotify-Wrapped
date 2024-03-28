@@ -15,6 +15,7 @@
     <string name="save_my_wrap">Save my wrap</string>
     <string name="favorite_songs">Favorite Songs</string>
     <string name="top_artists">Top Artists</string>
+    <string name="top_albums">Top Albums</string>
     <string name="genre_name">Genre name\n</string>
 
     <!--  fragment_update_account.xml  -->

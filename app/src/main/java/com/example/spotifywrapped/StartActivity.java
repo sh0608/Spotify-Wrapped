@@ -18,6 +18,12 @@ import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
+import java.util.HashMap;
+import android.util.Log;
+
 public class StartActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
@@ -26,10 +32,18 @@ public class StartActivity extends AppCompatActivity {
     private static final String REDIRECT_URI = "com.example.spotifywrapped://callback";
     private static final String SCOPES = "user-read-recently-played,user-read-private";
     private ActivityStartBinding binding;
+    private FirebaseFirestore db;
+
+    private static final String TAG = "LOG_TAG";
+
+    protected void setUpFirebase() {
+        db = FirebaseFirestore.getInstance();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpFirebase();
 
         binding = ActivityStartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

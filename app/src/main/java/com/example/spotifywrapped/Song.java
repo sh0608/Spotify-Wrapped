@@ -6,6 +6,9 @@ public class Song {
     private String imageUrl;
     private String albumName;
 
+    private int minutesPlayed;
+    private int timesPlayed;
+
     public Song(String name, String[] artists, String imageUrl, String albumName) {
         this.name = name;
         this.artists = artists;
@@ -28,5 +31,11 @@ public class Song {
 
     public String getAlbum() {
         return albumName;
+    }
+    public int getMinutesPlayed() {
+        return minutesPlayed;
+    }
+    public int getTimesPlayed() {
+        return timesPlayed;
     }
 }

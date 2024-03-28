@@ -42,12 +42,12 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                // Handle the loaded songs here
-                StringBuilder songList = new StringBuilder();
+                String temp = "";
                 for (Song song : songs) {
-                    songList.append(song.getName()).append("\n");
+                    temp += song.getName() + "\n";
                 }
-                wrapViewModel.updateText(songList.toString());
+                wrapViewModel.updateText(temp);
+                Log.d("Random", temp);
             }
 
             @Override

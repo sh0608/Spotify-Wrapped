@@ -6,6 +6,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -24,7 +25,7 @@ public class StartActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     protected static final String CLIENT_ID = "b0e28dce674d447987867d662ef7e1c9";
     private static final String REDIRECT_URI = "com.example.spotifywrapped://callback";
-    private static final String SCOPES = "user-read-recently-played,user-read-private";
+    private static final String SCOPES = "user-read-recently-played,user-read-private, user-top-read, user-library-read, streaming";
     private ActivityStartBinding binding;
 
     @Override
@@ -43,8 +44,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void authorizeSpotify() {
-        editor.remove("token");
-        editor.apply();
         final AuthorizationRequest request = new AuthorizationRequest.Builder(CLIENT_ID, AuthorizationResponse.Type.TOKEN, REDIRECT_URI)
                 .setScopes(new String[]{SCOPES})
                 .setShowDialog(true)

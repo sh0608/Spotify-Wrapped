@@ -34,7 +34,7 @@ public class WrapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentWrapBinding.inflate(inflater, container, false);
-        View view = inflater.inflate(R.layout.fragment_wrap, container, false);
+        View view = binding.getRoot();
         return view;
     }
 

@@ -1,5 +1,6 @@
 package com.example.spotifywrapped;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -8,6 +9,7 @@ import android.widget.Switch;
 
 import com.example.spotifywrapped.databinding.ActivityMainBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
+import com.example.spotifywrapped.ui.history.HistoryFragment;
 import com.example.spotifywrapped.ui.wrap.TopSongAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Switch theme_switch;
     SharedPreferences sharedPreferences = null;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

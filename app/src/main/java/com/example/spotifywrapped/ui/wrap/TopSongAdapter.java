@@ -14,15 +14,23 @@ import com.example.spotifywrapped.Song;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHolder> {
 
     private List<Song> topSongs;
+    private WrapViewModel model;
 
-    public TopSongAdapter(List<Song> topSongs) {
+
+    public TopSongAdapter(List<Song> topSongs, WrapViewModel model) {
         this.topSongs = topSongs;
+        this.model = model;
+    }
+
+    public int getItemViewType (final int position) {
+        return R.layout.item_topsong;
     }
     @NonNull
     @Override
@@ -51,6 +59,10 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
     @Override
     public int getItemCount() {
         return topSongs.size();
+    }
+
+    public void setTopSongs(List<Song> newSongs) {
+        topSongs = newSongs;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

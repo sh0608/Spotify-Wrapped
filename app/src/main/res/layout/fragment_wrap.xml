@@ -40,8 +40,6 @@
                 android:id="@+id/albumList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/top_albums"
-
                 app:layout_constraintBottom_toTopOf="@+id/nav_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

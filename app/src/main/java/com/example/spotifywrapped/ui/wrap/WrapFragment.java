@@ -8,10 +8,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
@@ -29,16 +33,16 @@ public class WrapFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentWrapBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_wrap, container, false);
+        return view;
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         WrapViewModel wrapViewModel =
                 new ViewModelProvider(this).get(WrapViewModel.class);
-
-        binding = FragmentWrapBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-
         String token = TokenManager.getToken(requireContext());
-
         // Call the getUserTopSongs method and pass the access token and a listener
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
@@ -59,35 +63,19 @@ public class WrapFragment extends Fragment {
                 wrapViewModel.updateText("Error loading top songs: " + errorMessage);
             }
         });
-
-//        try {
-//            ArrayList<Song> topSongs = (ArrayList<Song>) SpotifyApiHelper.getUserTopSongs(token);
-//            String songList = "";
-//            for (Song song : topSongs) {
-//
-//                songList += song.getName() + "\n";
-//            }
-//            wrapViewModel.updateText(songList);
-//
-//        } catch (IOException ioe) {
-//
-//            wrapViewModel.updateText("Error: cannot access top songs.");
-//        } catch (JSONException jsone) {
-//
-//            wrapViewModel.updateText("Error: cannot access top songs.");
-//        }
-
         // initialize adapter + recyclerview
-        wrapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
+        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        List<Song> topSongList = new ArrayList<>();
+        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongList, wrapViewModel);
+        topSongsRecyclerView.setAdapter(topSongAdapter);
         wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
             @Override
             public void onChanged(List<Song> songs) {
-                // set adapter list to songs
+                topSongAdapter.setTopSongs(songs);
             }
         });
 
-        // repeat for artists and playlists
-        return root;
     }
 
     @Override

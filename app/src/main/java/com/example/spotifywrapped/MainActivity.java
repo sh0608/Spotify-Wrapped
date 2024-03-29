@@ -48,20 +48,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-
-        // populating topSong RecyclerView
-//        RecyclerView topSongsRecyclerView = findViewById(R.id.favoriteSongList);
-//        List<Song> topSongs;
-//        try {
-//            topSongs = SpotifyApiHelper.getUserTopSongs("hello world");
-//        } catch (IOException | JSONException e) {
-//            throw new RuntimeException(e);
-//        }
-//        TopSongAdapter adapter = new TopSongAdapter(topSongs);
-//        topSongsRecyclerView.setAdapter(adapter);
-//        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         // THEME SWITCHER SETUP
         theme_switch = findViewById(R.id.switch_theme);
         sharedPreferences = getSharedPreferences("night", 0);

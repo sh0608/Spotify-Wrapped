@@ -43,15 +43,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favoriteSong"
+                app:layout_constraintTop_toBottomOf="@+id/topSongs"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/favoriteSong"
+                android:id="@+id/topSongs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/circular_spotifytext_black"
-                android:text="@string/favorite_songs"
+                android:text="@string/top_songs"
                 android:textColor="@color/white"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
                 android:id="@+id/topArtistsList"
                 android:layout_width="match_parent"
                 android:layout_height="233dp"
-                app:layout_constraintBottom_toTopOf="@+id/favoriteSong"
+                app:layout_constraintBottom_toTopOf="@+id/topSongs"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

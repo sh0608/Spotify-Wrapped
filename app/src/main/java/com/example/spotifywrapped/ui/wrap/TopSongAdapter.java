@@ -1,9 +1,13 @@
 package com.example.spotifywrapped.ui.wrap;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,9 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,11 +60,20 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
         TextView topSongTitleTextView = holder.topSongTitleTextView;
         topSongTitleTextView.setText(song.getName());
         TextView topSongArtistNameTextView = holder.topSongArtistNameTextView;
-        topSongArtistNameTextView.setText(Arrays.toString(song.getArtists()).replaceAll("\\[|\\]", ""));
+        String topArtistsNameFormatted = formatArray(song.getArtists());
+        topSongArtistNameTextView.setText(topArtistsNameFormatted);
         TextView topSongAlbumTitleTextView = holder.topSongAlbumTitleTextView;
         topSongAlbumTitleTextView.setText(song.getAlbum());
-
+        ImageView topSongImageView = holder.topSongImageView;
+        Picasso.get().load(song.getImageUrl()).into(topSongImageView);
     }
+
+    private String formatArray (String[] arr) {
+        String rtn = Arrays.toString(arr);
+        rtn = rtn.substring(1, rtn.length() - 1);
+        return rtn;
+    }
+
 
     @Override
     public int getItemCount() {
@@ -66,9 +85,10 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView topSongTitleTextView;
-        public TextView topSongArtistNameTextView;
-        public TextView topSongAlbumTitleTextView;
+        TextView topSongTitleTextView;
+        TextView topSongArtistNameTextView;
+        TextView topSongAlbumTitleTextView;
+        ImageView topSongImageView;
 
 
         public ViewHolder(View itemView) {
@@ -76,6 +96,7 @@ public class TopSongAdapter extends RecyclerView.Adapter<TopSongAdapter.ViewHold
             topSongTitleTextView = (TextView) itemView.findViewById(R.id.topSongTitle);
             topSongArtistNameTextView = (TextView) itemView.findViewById(R.id.topSongArtistName);
             topSongAlbumTitleTextView = (TextView) itemView.findViewById(R.id.topSongAlbumTitle);
+            topSongImageView = (ImageView) itemView.findViewById(R.id.topSongImage);
         }
     }
 }

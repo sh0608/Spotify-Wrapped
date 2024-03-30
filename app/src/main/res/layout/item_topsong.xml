@@ -7,7 +7,8 @@
     android:layout_height="110dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
@@ -20,16 +21,16 @@
 
         <TextView
             android:id="@+id/topSongTitle"
-            android:layout_width="match_parent"
+            android:layout_width="284dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="All Too Well"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/topSongAlbumTitle"
-            android:layout_width="match_parent"
+            android:layout_width="284dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="Red"
@@ -38,11 +39,27 @@
 
         <TextView
             android:id="@+id/topSongArtistName"
-            android:layout_width="match_parent"
+            android:layout_width="284dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="Taylor Swift"
-            android:textColor="@color/white"
+            android:textColor="@color/offwhite"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/topSongImage"
+        android:layout_width="68dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

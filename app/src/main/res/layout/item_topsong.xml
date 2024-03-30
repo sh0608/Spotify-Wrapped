@@ -24,7 +24,7 @@
             android:layout_width="284dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
-            android:text="All Too Well"
+            android:text="12. All Too Well"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -35,7 +35,7 @@
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="Red"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/topSongArtistName"

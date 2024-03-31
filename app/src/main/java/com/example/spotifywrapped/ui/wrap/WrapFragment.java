@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
@@ -25,6 +26,8 @@ import java.util.List;
 public class WrapFragment extends Fragment {
 
     private FragmentWrapBinding  binding;
+    private String topSongsList;
+    private String topArtistsList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,38 +45,42 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                String temp = "";
+                topSongsList = "";
                 for (Song song : songs) {
-                    temp += song.getName() + "\n";
+                    topSongsList += song.getName() + "\n";
                 }
-                wrapViewModel.updateText(temp);
-                Log.d("Random", temp);
+
+                Log.d("Random", topSongsList);
             }
 
             @Override
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
-                wrapViewModel.updateText("Error loading top songs: " + errorMessage);
+                topSongsList = "Error loading top songs: " + errorMessage;
             }
         });
 
-//        try {
-//            ArrayList<Song> topSongs = (ArrayList<Song>) SpotifyApiHelper.getUserTopSongs(token);
-//            String songList = "";
-//            for (Song song : topSongs) {
-//
-//                songList += song.getName() + "\n";
-//            }
-//            wrapViewModel.updateText(songList);
-//
-//        } catch (IOException ioe) {
-//
-//            wrapViewModel.updateText("Error: cannot access top songs.");
-//        } catch (JSONException jsone) {
-//
-//            wrapViewModel.updateText("Error: cannot access top songs.");
-//        }
+        SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
+            @Override
+            public void onArtistsLoaded(List<Artist> artists) {
+                topArtistsList = "";
+                for (Artist artist : artists) {
+                    topArtistsList += artist.getName() + "\n";
+                }
+
+                Log.d("Random", topArtistsList);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
+                topArtistsList =  "Error loading top artists: " + errorMessage;
+            }
+        });
+
+        wrapViewModel.updateText(topArtistsList);
 
         wrapViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;

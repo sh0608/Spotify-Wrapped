@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape>
+        <gradient
+            android:startColor="#DB53E6"
+            android:endColor="#FFC3C3"
+            android:angle="0"
+            />
+        <corners android:radius="15dp"/>
+    </shape>
+</item>
+<item android:drawable="@drawable/baseline_chevron_right_24" android:gravity="right|center_vertical"/>
+</layer-list>
+

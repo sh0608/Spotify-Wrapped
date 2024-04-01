@@ -12,15 +12,63 @@
         tools:layout="@layout/fragment_wrap" />
 
     <fragment
-        android:id="@+id/navigation_history"
-        android:name="com.example.spotifywrapped.ui.history.HistoryFragment"
-        android:label="Wrapped History"
-        tools:layout="@layout/fragment_history" />
-
-    <fragment
         android:id="@+id/navigation_update"
         android:name="com.example.spotifywrapped.ui.update_account.UpdateAccount"
         android:label="Update Account Information"
-        tools:layout="@layout/fragment_update_account" />
+        tools:layout="@layout/fragment_update_account" >
+        <action
+            android:id="@+id/action_navigation_update_to_navigation_history"
+            app:destination="@id/navigation_history" />
+        <action
+            android:id="@+id/action_navigation_update_to_navigation_history_one_month2"
+            app:destination="@id/navigation_history_one_month" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.example.spotifywrapped.ui.history.HistoryFragment"
+        android:label="Wrapped History"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_fragment_history_to_fragment_history_one_month"
+            app:destination="@id/navigation_history_one_month" />
+        <action
+            android:id="@+id/action_fragment_history_to_fragment_history_six_months"
+            app:destination="@id/navigation_history_six_month" />
+        <action
+            android:id="@+id/action_fragment_history_to_fragment_history_all_time"
+            app:destination="@id/navigation_history_all_time" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_history_one_month"
+        android:name="com.example.spotifywrapped.ui.history.HistoryOneMonth"
+        android:label="History One Month"
+        tools:layout="@layout/fragment_history_one_month" >
+        <action
+            android:id="@+id/action_navigation_history_one_month_to_navigation_history"
+            app:destination="@id/navigation_history" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_history_six_month"
+        android:name="com.example.spotifywrapped.ui.history.HistorySixMonth"
+        android:label="History Six Months"
+        tools:layout="@layout/fragment_history_six_month" >
+        <action
+            android:id="@+id/action_navigation_history_six_month_to_navigation_history"
+            app:destination="@id/navigation_history" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_history_all_time"
+        android:name="com.example.spotifywrapped.ui.history.HistoryAllTime"
+        android:label="History All Time"
+        tools:layout="@layout/fragment_history_all_time" >
+        <action
+            android:id="@+id/action_navigation_history_all_time_to_navigation_history"
+            app:destination="@id/navigation_history" />
+    </fragment>
 
 </navigation>

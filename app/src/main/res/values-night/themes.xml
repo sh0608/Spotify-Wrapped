@@ -40,4 +40,9 @@
         <item name="android:src">@drawable/mode_dark</item>
     </style>
 
+    <style name="BACK_BUTTON">
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:src">@drawable/baseline_chevron_left_dark_24</item>
+    </style>
+
 </resources>

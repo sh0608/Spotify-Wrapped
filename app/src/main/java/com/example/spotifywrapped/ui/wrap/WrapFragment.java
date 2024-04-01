@@ -13,8 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spotifywrapped.Album;
-import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
@@ -24,7 +23,9 @@ import java.util.List;
 
 public class WrapFragment extends Fragment {
 
-    private FragmentWrapBinding binding;
+    private FragmentWrapBinding  binding;
+    private String topSongsList;
+    private String topArtistsList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,10 +69,9 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                // Handle the loaded songs here
-                StringBuilder songList = new StringBuilder();
+                topSongsList = "";
                 for (Song song : songs) {
-                    songList.append(song.getName()).append("\n");
+                    topSongsList += song.getName() + "\n";
                 }
                 wrapViewModel.updateText(songList.toString());
                 wrapViewModel.updateSongsList(songs);
@@ -81,10 +81,30 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
-                wrapViewModel.updateText("Error loading top songs: " + errorMessage);
+                topSongsList = "Error loading top songs: " + errorMessage;
             }
         });
 
+        SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
+            @Override
+            public void onArtistsLoaded(List<Artist> artists) {
+                topArtistsList = "";
+                for (Artist artist : artists) {
+                    topArtistsList += artist.getName() + "\n";
+                }
+
+                Log.d("Random", topArtistsList);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
+                topArtistsList =  "Error loading top artists: " + errorMessage;
+            }
+        });
+
+        wrapViewModel.updateText(topArtistsList);
 
 
         wrapViewModel.getAlbumsList().observe(getViewLifecycleOwner(), new Observer<List<Album>>() {

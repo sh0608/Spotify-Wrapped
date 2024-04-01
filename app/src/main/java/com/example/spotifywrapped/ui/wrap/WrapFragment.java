@@ -39,6 +39,31 @@ public class WrapFragment extends Fragment {
                 new ViewModelProvider(this).get(WrapViewModel.class);
         String token = TokenManager.getToken(requireContext());
 
+        // initialize Top Album adapter + recyclerview
+        RecyclerView topAlbumsRecyclerView = view.findViewById(R.id.albumList);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+        topAlbumsRecyclerView.setLayoutManager(layoutManager);
+
+
+        List<Album> topAlbumList = new ArrayList<>();
+        TopAlbumAdapter topAlbumAdapter = new TopAlbumAdapter(topAlbumList);
+        topAlbumsRecyclerView.setAdapter(topAlbumAdapter);
+
+        // initialize Top Song adapter + recyclerview
+        RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
+        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        List<Song> topSongList = new ArrayList<>();
+        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongList);
+        topSongsRecyclerView.setAdapter(topSongAdapter);
+        wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
+            @Override
+            public void onChanged(List<Song> songs) {
+                topSongAdapter.notifyDataSetChanged();
+                topSongAdapter.setTopSongs(songs);
+            }
+        });
+
         // Call the getUserTopSongs method and pass the access token and a listener
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
@@ -61,16 +86,7 @@ public class WrapFragment extends Fragment {
         });
 
 
-        // initialize Top Album adapter + recyclerview
-        RecyclerView topAlbumsRecyclerView = view.findViewById(R.id.albumList);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        topAlbumsRecyclerView.setLayoutManager(layoutManager);
 
-
-        List<Album> topAlbumList = new ArrayList<>();
-        TopAlbumAdapter topAlbumAdapter = new TopAlbumAdapter(topAlbumList);
-        topAlbumsRecyclerView.setAdapter(topAlbumAdapter);
         wrapViewModel.getAlbumsList().observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albums) {
@@ -78,18 +94,7 @@ public class WrapFragment extends Fragment {
             }
         });
 
-        // initialize Top Song adapter + recyclerview
-        RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
-        topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        List<Song> topSongList = new ArrayList<>();
-        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongList);
-        topSongsRecyclerView.setAdapter(topSongAdapter);
-        wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
-            @Override
-            public void onChanged(List<Song> songs) {
-                topSongAdapter.setTopSongs(songs);
-            }
-        });
+
 
     }
 

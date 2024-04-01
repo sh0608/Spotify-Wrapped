@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:fontFamily="@font/circular_spotifytext_black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="Red"
             android:textAlignment="center" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:fontFamily="@font/circular_spotifytext_blackitalic"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:text="Taylor Swift"
             android:textAlignment="center" />
     </LinearLayout>

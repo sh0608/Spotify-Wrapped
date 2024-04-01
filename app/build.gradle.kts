@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.google.android.material:material:1.10.0")
     implementation("com.squareup.picasso:picasso:2.8")
     implementation(files("../spotify-app-remote-release-0.8.0.aar"))
     implementation(files("../spotify-auth-release-2.1.0.aar"))

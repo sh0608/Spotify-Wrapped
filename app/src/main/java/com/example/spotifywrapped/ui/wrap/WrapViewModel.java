@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.spotifywrapped.Album;
+import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.Song;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class WrapViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText = new MutableLiveData<>();
     private MutableLiveData<List<Song>> songsList = new MutableLiveData<>();
+    private MutableLiveData<List<Artist>> artistsList = new MutableLiveData<>();
 
     private MutableLiveData<List<Album>> albumsList = new MutableLiveData<>();
 
@@ -27,8 +29,16 @@ public class WrapViewModel extends ViewModel {
         songsList.setValue(songs);
     }
 
+    public void updateArtistsList(List<Artist> artists) {
+        artistsList.setValue(artists);
+    }
+
     public LiveData<List<Song>> getSongsList() {
         return songsList;
+    }
+
+    public LiveData<List<Artist>> getArtistsList() {
+        return artistsList;
     }
 
     public void updateAlbumsList(List<Album> albums) {

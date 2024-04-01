@@ -33,4 +33,6 @@ public class Artist {
     public String getGenres() {
         return genres;
     }
+
+
 }

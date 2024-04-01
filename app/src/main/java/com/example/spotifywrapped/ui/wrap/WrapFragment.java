@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,7 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.spotifywrapped.Album;
 import com.example.spotifywrapped.Artist;
+import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
@@ -26,6 +30,11 @@ public class WrapFragment extends Fragment {
     private FragmentWrapBinding  binding;
     private String topSongsList;
     private String topArtistsList;
+
+    private TextView textHome;
+    private List<Song> topSongs;
+    private List<Artist> topArtists;
+    private List<String> topGenres;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,23 +49,54 @@ public class WrapFragment extends Fragment {
                 new ViewModelProvider(this).get(WrapViewModel.class);
         String token = TokenManager.getToken(requireContext());
 
-        // initialize Top Album adapter + recyclerview
-        RecyclerView topAlbumsRecyclerView = view.findViewById(R.id.albumList);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        topAlbumsRecyclerView.setLayoutManager(layoutManager);
+        // initialize Top Artist adapter + recyclerView
+        RecyclerView topArtistsRecyclerView = view.findViewById(R.id.topArtistsList);
+        topArtistsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false));
+        topArtists = new ArrayList<>();
+        TopArtistAdapter topArtistAdapter = new TopArtistAdapter(topArtists);
+        topArtistsRecyclerView.setAdapter(topArtistAdapter);
 
+        // onChanged listener for Top Artists
+        wrapViewModel.getArtistsList().observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
+            @Override
+            public void onChanged(List<Artist> artists) {
+                topArtistAdapter.notifyDataSetChanged();
+                topArtistAdapter.setTopArtists(artists);
+            }
+        });
 
-        List<Album> topAlbumList = new ArrayList<>();
-        TopAlbumAdapter topAlbumAdapter = new TopAlbumAdapter(topAlbumList);
-        topAlbumsRecyclerView.setAdapter(topAlbumAdapter);
+        // Call the getUserTopArtists method and pass the access token and a listener
 
-        // initialize Top Song adapter + recyclerview
+        SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
+            @Override
+            public void onArtistsLoaded(List<Artist> artists) {
+                topArtistsList = "";
+                for (Artist artist : artists) {
+                    topArtistsList += artist.getName() + "\n";
+                }
+
+                wrapViewModel.updateText(topArtistsList.toString());
+                wrapViewModel.updateArtistsList(artists);            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
+                topArtistsList =  "Error loading top artists: " + errorMessage;
+            }
+        });
+
+        wrapViewModel.updateText(topArtistsList);
+
+        // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
         topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        List<Song> topSongList = new ArrayList<>();
-        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongList);
+        topSongs = new ArrayList<>();
+        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongs);
         topSongsRecyclerView.setAdapter(topSongAdapter);
+
+        //  onChanged listener for Top Songs
         wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
             @Override
             public void onChanged(List<Song> songs) {
@@ -73,7 +113,7 @@ public class WrapFragment extends Fragment {
                 for (Song song : songs) {
                     topSongsList += song.getName() + "\n";
                 }
-                wrapViewModel.updateText(songList.toString());
+                wrapViewModel.updateText(topSongsList.toString());
                 wrapViewModel.updateSongsList(songs);
             }
 
@@ -85,38 +125,14 @@ public class WrapFragment extends Fragment {
             }
         });
 
-        SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
-            @Override
-            public void onArtistsLoaded(List<Artist> artists) {
-                topArtistsList = "";
-                for (Artist artist : artists) {
-                    topArtistsList += artist.getName() + "\n";
-                }
-
-                Log.d("Random", topArtistsList);
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                // Handle the error here
-                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
-                topArtistsList =  "Error loading top artists: " + errorMessage;
-            }
-        });
-
-        wrapViewModel.updateText(topArtistsList);
-
-
-        wrapViewModel.getAlbumsList().observe(getViewLifecycleOwner(), new Observer<List<Album>>() {
-            @Override
-            public void onChanged(List<Album> albums) {
-                topAlbumAdapter.setTopAlbums(albums);
-            }
-        });
-
-
-
+        // initialize Top genre adapter + recyclerview
+        RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
+        topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        //topGenres = getTopGenres(topArtists);
+        //TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
+        //topGenreRecyclerView.setAdapter(topGenreAdapter);
     }
+
 
     @Override
     public void onDestroyView() {

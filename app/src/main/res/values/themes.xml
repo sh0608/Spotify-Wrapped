@@ -39,4 +39,18 @@
         <item name="android:src">@drawable/mode_light</item>
     </style>
 
+    <style name="HISTORY_BUTTONS">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/circular_spotifytext_bold</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">start</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="BACK_BUTTON">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:src">@drawable/baseline_chevron_left_light_24</item>
+    </style>
+
 </resources>

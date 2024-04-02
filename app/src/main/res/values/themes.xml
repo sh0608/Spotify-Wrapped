@@ -39,6 +39,11 @@
         <item name="android:src">@drawable/mode_light</item>
     </style>
 
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="HISTORY_BUTTONS">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/circular_spotifytext_bold</item>

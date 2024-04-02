@@ -231,6 +231,49 @@ public class SpotifyApiHelper {
         });
     }
 
+    public static void getUserTop50Artists(String accessToken, OnArtistsLoadedListener listener) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(API_BASE_URL + "me/top/artists?time_range=short_term&limit=50&offset=0")
+                .addHeader("Authorization", "Bearer " + accessToken)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    listener.onError(e.getMessage());
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    String errorMessage = "Unexpected response code: " + response.code();
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(errorMessage);
+                    });
+                    return;
+                }
+
+                try {
+                    String jsonData = response.body().string();
+                    List<Artist> artists = parseTopArtistsJson(jsonData);
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onArtistsLoaded(artists);
+                    });
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(e.getMessage());
+                    });
+                }
+            }
+        });
+    }
+
     private static List<Artist> parseTopArtistsJson(String jsonData) throws JSONException {
         List<Artist> topArtists = new ArrayList<>();
 

@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,9 +20,7 @@ import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,15 +28,6 @@ import java.util.Map;
 public class WrapFragment extends Fragment {
 
     private FragmentWrapBinding  binding;
-    private String topSongsList;
-    private String topArtistsList;
-
-    private TextView textHome;
-    private List<Song> topSongs;
-    private List<Artist> topArtists;
-    private List<String> topGenres;
-
-    static List<Artist> dummy;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +45,7 @@ public class WrapFragment extends Fragment {
         // initialize Top genre adapter + recyclerview
         RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
         topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        // topGenres = getTopGenres(topArtists);
+        List<String> topGenres = new ArrayList<>();
         TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
         topGenreRecyclerView.setAdapter(topGenreAdapter);
 
@@ -71,11 +58,26 @@ public class WrapFragment extends Fragment {
             }
         });
 
+        SpotifyApiHelper.getUserTop50Artists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
+            @Override
+            public void onArtistsLoaded(List<Artist> artists) {
+                List<String> newGenres = getTopGenres(artists);
+                wrapViewModel.updateGenresList(newGenres);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
+                String topArtists =  "Error loading top artists: " + errorMessage;
+            }
+        });
+
         // initialize Top Artist adapter + recyclerView
         RecyclerView topArtistsRecyclerView = view.findViewById(R.id.topArtistsList);
         topArtistsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
-        topArtists = new ArrayList<>();
+        List<Artist> topArtists = new ArrayList<>();
         TopArtistAdapter topArtistAdapter = new TopArtistAdapter(topArtists);
         topArtistsRecyclerView.setAdapter(topArtistAdapter);
 
@@ -85,8 +87,6 @@ public class WrapFragment extends Fragment {
             public void onChanged(List<Artist> artists) {
                 topArtistAdapter.notifyDataSetChanged();
                 topArtistAdapter.setTopArtists(artists);
-                topGenreAdapter.notifyDataSetChanged();
-                topGenreAdapter.setTopGenres(getTopGenres(artists));
             }
         });
 
@@ -95,32 +95,21 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
             @Override
             public void onArtistsLoaded(List<Artist> artists) {
-                topArtistsList = "";
-                for (Artist artist : artists) {
-                    topArtistsList += artist.getName() + "\n";
-                }
-
-                dummy = artists;
-                wrapViewModel.updateText(topArtistsList.toString());
                 wrapViewModel.updateArtistsList(artists);
-                List<String> newGenres = getTopGenres(artists);
-                wrapViewModel.updateGenresList(newGenres);
             }
 
             @Override
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
-                topArtistsList =  "Error loading top artists: " + errorMessage;
+                String topArtists =  "Error loading top artists: " + errorMessage;
             }
         });
-
-        wrapViewModel.updateText(topArtistsList);
 
         // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
         topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        topSongs = new ArrayList<>();
+        List<Song> topSongs = new ArrayList<>();
         TopSongAdapter topSongAdapter = new TopSongAdapter(topSongs);
         topSongsRecyclerView.setAdapter(topSongAdapter);
 
@@ -137,11 +126,6 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                topSongsList = "";
-                for (Song song : songs) {
-                    topSongsList += song.getName() + "\n";
-                }
-                wrapViewModel.updateText(topSongsList.toString());
                 wrapViewModel.updateSongsList(songs);
             }
 
@@ -149,7 +133,7 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
-                topSongsList = "Error loading top songs: " + errorMessage;
+                String topSongsList = "Error loading top songs: " + errorMessage;
             }
         });
 
@@ -172,7 +156,7 @@ public class WrapFragment extends Fragment {
         }
 
         // Create a list from elements of HashMap
-        List<HashMap.Entry<String, Integer>> list  = new LinkedList<>(genreList.entrySet());
+        List<HashMap.Entry<String, Integer>> list  = new ArrayList<>(genreList.entrySet());
 
         // sort by value
         list.sort(Map.Entry.comparingByValue());
@@ -180,9 +164,14 @@ public class WrapFragment extends Fragment {
         Collections.reverse(list);
 
         List<String> topGenreList = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry: list) {
-            topGenreList.add(entry.getKey());
+        int i = 0;
+        while (i < 10) {
+            topGenreList.add(list.get(i).getKey());
+            i++;
         }
+//        for (Map.Entry<String, Integer> entry: list) {
+//            topGenreList.add(entry.getKey());
+//        }
 
         return topGenreList;
     }

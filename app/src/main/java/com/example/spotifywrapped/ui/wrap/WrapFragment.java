@@ -169,10 +169,6 @@ public class WrapFragment extends Fragment {
             topGenreList.add(list.get(i).getKey());
             i++;
         }
-//        for (Map.Entry<String, Integer> entry: list) {
-//            topGenreList.add(entry.getKey());
-//        }
-
         return topGenreList;
     }
 

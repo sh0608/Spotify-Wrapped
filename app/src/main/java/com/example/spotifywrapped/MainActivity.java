@@ -84,16 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-            // THEME SWITCHER SETUP
-            theme_switch = findViewById(R.id.switch_theme);
-            sharedPreferences = getSharedPreferences("night", 0);
-            Boolean switch_theme_flag = sharedPreferences.getBoolean("night_mode", true);
-            if (switch_theme_flag) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                theme_switch.setChecked(true);
-            }
-
             theme_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

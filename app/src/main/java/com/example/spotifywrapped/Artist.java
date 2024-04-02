@@ -8,9 +8,9 @@ public class Artist {
     private String name;
     private String followers;
     private String imageUrl;
-    private String genres;
+    private String[] genres;
 
-    public Artist(String name, String followers, String imageUrl, String genres) {
+    public Artist(String name, String followers, String imageUrl, String[] genres) {
         this.name = name;
         this.followers = followers;
         this.imageUrl = imageUrl;
@@ -30,7 +30,7 @@ public class Artist {
         return imageUrl;
     }
 
-    public String getGenres() {
+    public String[] getGenres() {
         return genres;
     }
 

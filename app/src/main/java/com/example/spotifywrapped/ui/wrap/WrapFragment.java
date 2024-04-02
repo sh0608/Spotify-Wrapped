@@ -14,8 +14,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.spotifywrapped.Album;
 import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
@@ -23,7 +21,13 @@ import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class WrapFragment extends Fragment {
 
@@ -35,6 +39,8 @@ public class WrapFragment extends Fragment {
     private List<Song> topSongs;
     private List<Artist> topArtists;
     private List<String> topGenres;
+
+    static List<Artist> dummy;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +54,22 @@ public class WrapFragment extends Fragment {
         WrapViewModel wrapViewModel =
                 new ViewModelProvider(this).get(WrapViewModel.class);
         String token = TokenManager.getToken(requireContext());
+
+        // initialize Top genre adapter + recyclerview
+        RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
+        topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        // topGenres = getTopGenres(topArtists);
+        TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
+        topGenreRecyclerView.setAdapter(topGenreAdapter);
+
+        // onChanged listener for Top Genres
+        wrapViewModel.getGenresList().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> generes) {
+                topGenreAdapter.notifyDataSetChanged();
+                topGenreAdapter.setTopGenres(generes);
+            }
+        });
 
         // initialize Top Artist adapter + recyclerView
         RecyclerView topArtistsRecyclerView = view.findViewById(R.id.topArtistsList);
@@ -63,6 +85,8 @@ public class WrapFragment extends Fragment {
             public void onChanged(List<Artist> artists) {
                 topArtistAdapter.notifyDataSetChanged();
                 topArtistAdapter.setTopArtists(artists);
+                topGenreAdapter.notifyDataSetChanged();
+                topGenreAdapter.setTopGenres(getTopGenres(artists));
             }
         });
 
@@ -76,8 +100,12 @@ public class WrapFragment extends Fragment {
                     topArtistsList += artist.getName() + "\n";
                 }
 
+                dummy = artists;
                 wrapViewModel.updateText(topArtistsList.toString());
-                wrapViewModel.updateArtistsList(artists);            }
+                wrapViewModel.updateArtistsList(artists);
+                List<String> newGenres = getTopGenres(artists);
+                wrapViewModel.updateGenresList(newGenres);
+            }
 
             @Override
             public void onError(String errorMessage) {
@@ -125,12 +153,38 @@ public class WrapFragment extends Fragment {
             }
         });
 
-        // initialize Top genre adapter + recyclerview
-        RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
-        topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        //topGenres = getTopGenres(topArtists);
-        //TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
-        //topGenreRecyclerView.setAdapter(topGenreAdapter);
+    }
+
+
+    private List<String> getTopGenres(List<Artist> topArtists) {
+        HashMap<String, Integer> genreList = new HashMap<>();
+        for (Artist artist : topArtists) {
+            for (String genre : artist.getGenres()) {
+                if (genre != null) {
+                    if (genreList.containsKey(genre)) {
+                        int numOccurence = genreList.get(genre);
+                        genreList.put(genre, ++numOccurence);
+                    } else {
+                        genreList.put(genre, 0);
+                    }
+                }
+            }
+        }
+
+        // Create a list from elements of HashMap
+        List<HashMap.Entry<String, Integer>> list  = new LinkedList<>(genreList.entrySet());
+
+        // sort by value
+        list.sort(Map.Entry.comparingByValue());
+
+        Collections.reverse(list);
+
+        List<String> topGenreList = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry: list) {
+            topGenreList.add(entry.getKey());
+        }
+
+        return topGenreList;
     }
 
 

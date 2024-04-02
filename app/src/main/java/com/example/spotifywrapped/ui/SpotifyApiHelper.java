@@ -177,9 +177,20 @@ public class SpotifyApiHelper {
         String name = artistJson.getString("name");
         String followers = artistJson.getJSONObject("followers").getString("total");
         String imageUrl = artistJson.getJSONArray("images").getJSONObject(0).getString("url");
-        String genres = artistJson.getJSONArray("genres").toString();
-
+        JSONArray jsonGenres = artistJson.getJSONArray("genres");
+        String[] genres = toStringArray(jsonGenres);
         return new Artist(name, followers, imageUrl, genres);
+    }
+
+    public static String[] toStringArray(JSONArray array) {
+        if(array == null)
+            return new String[0];
+
+        String[] arr = new String[array.length()];
+        for(int i = 0; i< arr.length; i++) {
+            arr[i] = array.optString(i);
+        }
+        return arr;
     }
 
     // Interface for artists loaded listener

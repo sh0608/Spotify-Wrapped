@@ -9,7 +9,10 @@ import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.Song;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class WrapViewModel extends ViewModel {
 
@@ -17,12 +20,12 @@ public class WrapViewModel extends ViewModel {
     private MutableLiveData<List<Song>> songsList = new MutableLiveData<>();
     private MutableLiveData<List<Artist>> artistsList = new MutableLiveData<>();
 
-    private MutableLiveData<List<Album>> albumsList = new MutableLiveData<>();
+    private MutableLiveData<List<String>> genresList = new MutableLiveData<>();
 
     public WrapViewModel() {
         mText.setValue("This is home fragment");
         songsList.setValue(new ArrayList<>());
-        albumsList.setValue(new ArrayList<>());
+        genresList.setValue(new ArrayList<>());
     }
 
     public void updateSongsList(List<Song> songs) {
@@ -33,6 +36,11 @@ public class WrapViewModel extends ViewModel {
         artistsList.setValue(artists);
     }
 
+    public void updateGenresList(List<String> newGenres) {
+        genresList.setValue(newGenres);
+    }
+
+
     public LiveData<List<Song>> getSongsList() {
         return songsList;
     }
@@ -41,18 +49,17 @@ public class WrapViewModel extends ViewModel {
         return artistsList;
     }
 
-    public void updateAlbumsList(List<Album> albums) {
-        albumsList.setValue(albums);
-    }
-
-    public LiveData<List<Album>> getAlbumsList() {
-        return albumsList;
+    public LiveData<List<String>> getGenresList() {
+        return genresList;
     }
 
     public void updateText(String text) {
 
         mText.setValue(text);
     }
+
+
+
 
     public LiveData<String> getText() {
         return mText;

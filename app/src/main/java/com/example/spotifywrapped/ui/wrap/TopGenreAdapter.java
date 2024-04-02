@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spotifywrapped.R;
 import java.util.List;
 
-public class TopGenreAdapter {
+public class TopGenreAdapter extends RecyclerView.Adapter<TopGenreAdapter.ViewHolder> {
     private List<String> topGenres;
 
     public TopGenreAdapter(List<String> topGenres) {
@@ -51,7 +51,7 @@ public class TopGenreAdapter {
      * @param position The position of the item within the adapter's data set.
      */
     public void onBindViewHolder(@NonNull TopGenreAdapter.ViewHolder holder, int position) {
-        String genre = topGenres.get(position);
+        String genre = (position + 1) + ". " + topGenres.get(position);
         TextView topGenreNameTextView = holder.topGenreNameTextView;
         topGenreNameTextView.setText(genre);
     }

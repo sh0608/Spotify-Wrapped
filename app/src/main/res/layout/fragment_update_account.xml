@@ -90,11 +90,13 @@
         android:layout_width="250dp"
         android:layout_height="62dp"
         android:layout_marginTop="116dp"
+        android:layout_marginBottom="350dp"
 
         android:fontFamily="@font/circular_spotifytext_black"
         android:text="@string/delete_account"
         android:textSize="14sp"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

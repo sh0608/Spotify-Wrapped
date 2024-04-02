@@ -26,46 +26,47 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.346" />
 
+    <!--    <Button-->
+<!--        android:id="@+id/change_password_button"-->
+
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="62dp"-->
+<!--        android:layout_marginBottom="216dp"-->
+
+<!--        android:backgroundTint="@color/spotifyGreen"-->
+
+<!--        android:text="@string/change_password"-->
+<!--        android:fontFamily="@font/circular_spotify"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="14sp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/update_login_textview"-->
+<!--        app:layout_constraintVertical_bias="0.609" />-->
+
     <Button
         android:id="@+id/change_username_button"
 
         android:layout_width="250dp"
         android:layout_height="62dp"
-        android:textSize="13sp"
-
-
         android:backgroundTint="@color/spotifyGreen"
+
+
+        android:fontFamily="@font/circular_spotify"
 
         android:text="@string/change_username_or_email"
         android:textColor="@color/white"
-        android:fontFamily="@font/circular_spotify"
+        android:textSize="13sp"
 
-        app:layout_constraintBottom_toTopOf="@+id/change_password_button"
+        app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/update_login_textview"
-        app:layout_constraintVertical_bias="0.841" />
-
-    <Button
-        android:id="@+id/change_password_button"
-
-        android:layout_width="250dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="216dp"
-
-        android:backgroundTint="@color/spotifyGreen"
-
-        android:text="@string/change_password"
-        android:fontFamily="@font/circular_spotify"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_login_textview"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <ImageView
         android:src="@drawable/transparent"
@@ -88,16 +89,16 @@
 
         android:layout_width="250dp"
         android:layout_height="62dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="116dp"
 
+        android:fontFamily="@font/circular_spotifytext_black"
         android:text="@string/delete_account"
         android:textSize="14sp"
-        android:fontFamily="@font/circular_spotifytext_black"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_password_button" />
+        app:layout_constraintTop_toBottomOf="@+id/update_login_textview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

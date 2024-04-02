@@ -100,6 +100,78 @@ public class SpotifyApiHelper {
         });
     }
 
+    public enum TimeFrame {
+        SHORT, MEDIUM, LONG
+    }
+
+
+    // used for getting wrapped over time_span (custom user story 8)
+    public static void getUserTopSongs(String accessToken, OnSongsLoadedListener listener, TimeFrame timeframe) {
+        OkHttpClient client = new OkHttpClient();
+        Request request;
+        switch (timeframe) {
+            case SHORT:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/tracks?time_range=short_term&limit=10&offset=0") // ?time_range=short_term&limit=5&offset=0
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+            default:
+            case MEDIUM:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/tracks?time_range=medium_term&limit=10&offset=0") // ?time_range=short_term&limit=5&offset=0
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+            case LONG:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/tracks?time_range=long_term&limit=10&offset=0") // ?time_range=short_term&limit=5&offset=0
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+
+        }
+
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                // Execute the callback on the main thread
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    listener.onError(e.getMessage());
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    // If response is not successful, execute the callback with an error message
+                    String errorMessage = "Unexpected response code: " + response.code();
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(errorMessage);
+                    });
+                    return;
+                }
+
+                try {
+                    String jsonData = response.body().string();
+                    List<Song> songs = parseTopSongsJson(jsonData);
+                    // Execute the callback on the main thread
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onSongsLoaded(songs);
+                    });
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    // Execute the callback with an error message
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(e.getMessage());
+                    });
+                }
+            }
+        });
+    }
     private static List<Song> parseTopSongsJson(String jsonData) throws JSONException {
         List<Song> topSongs = new ArrayList<>();
 

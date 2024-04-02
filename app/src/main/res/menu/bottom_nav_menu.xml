@@ -11,6 +11,7 @@
         android:icon="@drawable/baseline_access_time_24"
         android:title="@string/history" />
 
+
     <item
         android:id="@+id/navigation_update"
         android:icon="@drawable/baseline_account_circle_24"

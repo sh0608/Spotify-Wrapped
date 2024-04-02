@@ -1,7 +1,10 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
 }
+
 
 android {
     namespace = "com.example.spotifywrapped"
@@ -27,6 +30,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -37,7 +43,8 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.google.android.material:material:1.10.0")
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation(files("../spotify-app-remote-release-0.8.0.aar"))
     implementation(files("../spotify-auth-release-2.1.0.aar"))
     implementation("androidx.browser:browser:1.8.0")

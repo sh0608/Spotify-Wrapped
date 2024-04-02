@@ -34,12 +34,22 @@ public class StartActivity extends AppCompatActivity {
     private static final String REDIRECT_URI = "com.example.spotifywrapped://callback";
     private static final String SCOPES = "user-read-recently-played,user-read-private, user-top-read, user-library-read, streaming";
     private ActivityStartBinding binding;
-    private FirebaseFirestore db;
 
+    private Engine engine;
     private static final String TAG = "LOG_TAG";
 
     protected void setUpFirebase() {
-        db = FirebaseFirestore.getInstance();
+        engine = new Engine();
+        User u1 = new User("1","user1","user1@g");
+        User u2 = new User("2","user2","user2@g");
+        User u3 = new User("3","user3","user3@g");
+        engine.addUser(u1);
+        engine.addUser(u2);
+        engine.addUser(u3);
+//        engine.addConnection(u1,u2);
+//        engine.addConnection(u1,u3);
+//        engine.addConnection(u3,u2);
+        engine.getConnections(u1);
     }
 
     @Override

@@ -47,7 +47,7 @@ public class HistoryOneMonth extends Fragment {
         new ViewModelProvider(this).get(HistoryOneMonthViewModel.class);
 
         RecyclerView recyclerView = binding.songsRecyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         SongsAdapter adapter = new SongsAdapter(songList);
         recyclerView.setAdapter(adapter);

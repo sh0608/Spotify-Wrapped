@@ -52,7 +52,7 @@ public class WrapViewModel extends ViewModel {
 
     public void updateGeminiResult(String text) {
 
-        geminiResult.setValue(text);
+        geminiResult.postValue(text);
     }
 
     public LiveData<String> getGeminiResult() {

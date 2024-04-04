@@ -36,6 +36,7 @@ public class GeminiApiHelper {
             @Override
             public void onSuccess(GenerateContentResponse result) {
                 wrapViewModel.updateGeminiResult(result.getText());
+                Log.d("THE SHIT IS WORKING", result.getText());
             }
 
             @Override
@@ -45,11 +46,12 @@ public class GeminiApiHelper {
         }, executor);
     }
 
-    private static String constructPrompt(List<Song> songs) {
-        String prompt = "Write a 2-3 sentence description of me based on the fact that my top 3 listened to songs are ";
+    public static String constructPrompt(List<Song> songs) {
+        String prompt = "Write a 2-3 sentence description of how I act, think, and dress " +
+                "based on the fact that my top 3 listened to songs are ";
         for (int i = 0; i < 3; i++) {
-            Song song = songs.get(0);
-            prompt += song.getName() + " by " + song.getArtists()[0];
+            Song song = songs.get(i);
+            prompt += song.getName() + " by " + song.getArtists()[0] + ", ";
         }
         return prompt;
     }

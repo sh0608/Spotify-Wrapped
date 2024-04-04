@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
 import android.util.Log;
 
 public class StartActivity extends AppCompatActivity {
@@ -43,13 +44,29 @@ public class StartActivity extends AppCompatActivity {
         User u1 = new User("1","user1","user1@g");
         User u2 = new User("2","user2","user2@g");
         User u3 = new User("3","user3","user3@g");
+        User u4 = new User("4","user4","user4@g");
         engine.addUser(u1);
         engine.addUser(u2);
         engine.addUser(u3);
-//        engine.addConnection(u1,u2);
-//        engine.addConnection(u1,u3);
-//        engine.addConnection(u3,u2);
-        engine.getConnections(u1);
+        engine.addUser(u4);
+
+        engine.addConnection(u1,u2);
+        engine.addConnection(u1,u3);
+        engine.addConnection(u3,u2);
+        engine.addConnection(u4,u1);
+        engine.addConnection(u4,u2);
+
+        engine.acceptConnection(u1, u2);
+
+        engine.getConnections(u1).thenAccept(users -> {
+            for (User user : users) {
+                Log.d("LOG_TAG", user.getUsername());
+            }
+
+        }).exceptionally(e -> {
+            Log.e("LOG_TAG", e.getMessage());
+            return null;
+        });
     }
 
     @Override

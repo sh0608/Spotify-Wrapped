@@ -1,5 +1,6 @@
 package com.example.spotifywrapped;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -11,12 +12,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import androidx.annotation.NonNull;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.Source;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 
 import android.util.Log;
+
 
 public class Engine {
     private FirebaseFirestore db;
@@ -25,78 +34,119 @@ public class Engine {
         db = FirebaseFirestore.getInstance();
     }
 
+//    /**
+//     * Adds a user to the database
+//     * @param username username of user to be added
+//     * @param email email of user to be added
+//     */
+
+    // Temporary add user function -- change to username and email in future
     public void addUser(User u) {
+        // fetch id
         db.collection("user-info").document(u.getId()).set(u);
     }
+
+    /**
+     * Checks if a and b are friends, or if a request has been sent. If not, request is sent.
+     * @param a User sending the friend request
+     * @param b User receiving the friend request (potentially change to email)
+     */
     public void addConnection(User a, User b) {
+        Task<QuerySnapshot> task1 = db.collection("connections")
+                .whereEqualTo("id_1", a.getId())
+                .whereEqualTo("id_2", b.getId())
+                .get();
+
+        Task<QuerySnapshot> task2 = db.collection("connections")
+                .whereEqualTo("id_1", b.getId())
+                .whereEqualTo("id_2", a.getId())
+                .get();
+
+        Tasks.whenAllComplete(task1, task2).addOnCompleteListener(tasks -> {
+            if (tasks.isSuccessful()) {
+                List<Task<QuerySnapshot>> queryTasks = Arrays.asList(task1, task2);
+                int tot = 0;
+                for (Task<QuerySnapshot> queryTask : queryTasks)
+                    tot += queryTask.getResult().size();
+                if(tot == 0) {
+                    // a send request to b: hash id to a + '_' + b
+                    String hsh = a.getId() + "_" + b.getId();
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("id_1", a.getId());
+                    item.put("id_2", b.getId());
+                    item.put("pending", 1);
+                    Log.d("LOG_TAG", "New connection!");
+                    db.collection("connections").document(hsh).set(item);
+                }
+            }
+        });
+    }
+
+    /**
+     * Changes an active request from pending to not pending
+     * @param from User that sent request
+     * @param to User accepting request
+     */
+    public void acceptConnection(User from, User to){
+        // to accepts request from from
+        String hsh = from.getId() + "_" + to.getId();
         Map<String, Object> item = new HashMap<>();
-        item.put("id_1", a.getId());
-        item.put("id_2", b.getId());
+        item.put("id_1", from.getId());
+        item.put("id_2", to.getId());
         item.put("pending", 0);
-        db.collection("user-connections").add(item);
+        db.collection("connections").document(hsh).set(item);
     }
+    public CompletableFuture<List<User>> getConnections(User u) {
+        CompletableFuture<List<User>> future = new CompletableFuture<>();
+        List<User> out = new CopyOnWriteArrayList<>();
 
-    public ArrayList<User> getConnections(User u) {
-        // query all connections where user a or b is user u.
-        ArrayList<User> out = new ArrayList<User>();
+        Task<QuerySnapshot> task1 = db.collection("connections")
+                .whereEqualTo("id_1", u.getId())
+                .whereEqualTo("pending", 0)
+                .get();
 
-        Query capitalCities = db.collection("user-info").whereEqualTo("id", "1");
+        Task<QuerySnapshot> task2 = db.collection("connections")
+                .whereEqualTo("id_2", u.getId())
+                .whereEqualTo("pending", 0)
+                .get();
 
-        db.collection("user-info")
-                .whereEqualTo("id", "1")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("LOG_TAG", document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d("LOG_TAG", "Error getting documents: ", task.getException());
+        Tasks.whenAllComplete(task1, task2).addOnCompleteListener(tasks -> {
+            if (tasks.isSuccessful()) {
+                List<Task<QuerySnapshot>> queryTasks = Arrays.asList(task1, task2);
+
+                for (Task<QuerySnapshot> queryTask : queryTasks) {
+                    if (queryTask.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : queryTask.getResult()) {
+                            String otherUserId = document.getString("id_1").equals(u.getId()) ? document.getString("id_2") : document.getString("id_1");
+                            db.collection("user-info")
+                                    .whereEqualTo("id", otherUserId)
+                                    .get()
+                                    .addOnCompleteListener(task_i -> {
+                                        if (task_i.isSuccessful()) {
+                                            for (QueryDocumentSnapshot doc : task_i.getResult()) {
+                                                User user = new User(doc.getString("id"), doc.getString("username"), doc.getString("email"));
+                                                out.add(user);
+                                            }
+                                            if (out.size() >= (task1.getResult().size() + task2.getResult().size())) {
+                                                future.complete(out);
+                                            }
+                                        } else {
+                                            future.completeExceptionally(task_i.getException());
+                                        }
+                                    });
                         }
+                    } else {
+                        future.completeExceptionally(queryTask.getException());
                     }
-                });
+                }
+            } else {
+                future.completeExceptionally(tasks.getException());
+            }
+        });
 
-        return out;
-
-//        Task<QuerySnapshot> task1 = db.collection("user-connections")
-//                .whereEqualTo("id_1", u.getId())
-//                .whereEqualTo("pending", "0")
-//                .get();
-//
-//        Task<QuerySnapshot> task2 = db.collection("user-connections")
-//                .whereEqualTo("id_2", u.getId())
-//                .whereEqualTo("pending", "0")
-//                .get();
-//
-//        Tasks.whenAllComplete(task1, task2).addOnCompleteListener(tasks -> {
-//            if (tasks.isSuccessful()) {
-//                for (Task<QuerySnapshot> task : Arrays.asList(task1, task2)) {
-//                    if (task.isSuccessful()) {
-//                        QuerySnapshot snapshot = task.getResult();
-//                        for (QueryDocumentSnapshot document : snapshot) {
-//                            String otherUserId = document.getString("id_1").equals(u.getId()) ? document.getString("id_2") : document.getString("id_1");
-//                            System.out.println("reached");
-//                            db.collection("user-info").document(otherUserId).get().addOnCompleteListener(userTask -> {
-//                                if (userTask.isSuccessful() && userTask.getResult().exists()) {
-//                                    User user = userTask.getResult().toObject(User.class);
-//                                    out.add(user);
-//                                }
-//                            });
-//                        }
-//                    }
-//                }
-//            }
-//        });
-//        System.out.println("DONE");
-//        System.out.println("out size: " + out.size());
-//        for(int i=0; i<out.size(); i++) {
-//            System.out.println("printed!");
-//            System.out.println("LOGGED: " + out.get(i).getUsername());
-//        }
-//        return out;
+        return future;
     }
+
 
     public static JSONObject createAndAddWrapped(User u, int year) {
         // TODO: Create and add an individual wrapped for year

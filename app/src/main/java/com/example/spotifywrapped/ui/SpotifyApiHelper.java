@@ -21,38 +21,10 @@ import android.os.Handler;
 public class SpotifyApiHelper {
     private static final String API_BASE_URL = "https://api.spotify.com/v1/";
 
-    public static Song parseTrackJson(JSONObject trackJson) throws JSONException {
-        String name = trackJson.getString("name");
-
-        // Extracting artists
-        JSONArray artistsArray = trackJson.getJSONArray("artists");
-        String[] artists = new String[6];
-        for (int i = 0; i < artistsArray.length(); i++) {
-            JSONObject artistObject = artistsArray.getJSONObject(i);
-            artists[i] = artistObject.getString("name");
-        }
-
-        // Extracting album
-        JSONObject albumObject = trackJson.getJSONObject("album");
-        String albumName = albumObject.getString("name");
-
-        // Extracting image URL
-        JSONArray imagesArray = albumObject.getJSONArray("images");
-        String imageUrl = null;
-        if (imagesArray.length() > 0) {
-            JSONObject firstImage = imagesArray.getJSONObject(0);
-            imageUrl = firstImage.getString("url");
-        }
-
-        // Constructing Song object
-        return new Song(name, artists, imageUrl, albumName);
+    // top songs stuff
+    public enum TimeFrame {
+        SHORT, MEDIUM, LONG
     }
-
-    public interface OnSongsLoadedListener {
-        void onSongsLoaded(List<Song> songs);
-        void onError(String errorMessage);
-    }
-
     public static void getUserTopSongs(String accessToken, OnSongsLoadedListener listener) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -100,12 +72,8 @@ public class SpotifyApiHelper {
         });
     }
 
-    public enum TimeFrame {
-        SHORT, MEDIUM, LONG
-    }
-
-
     // used for getting wrapped over time_span (custom user story 8)
+    // we should just change this to call the other getUserTopSongs instead of rewriting
     public static void getUserTopSongs(String accessToken, OnSongsLoadedListener listener, TimeFrame timeframe) {
         OkHttpClient client = new OkHttpClient();
         Request request;
@@ -172,6 +140,7 @@ public class SpotifyApiHelper {
             }
         });
     }
+
     private static List<Song> parseTopSongsJson(String jsonData) throws JSONException {
         List<Song> topSongs = new ArrayList<>();
 
@@ -186,8 +155,40 @@ public class SpotifyApiHelper {
         return topSongs;
     }
 
-    //top artist stuff
+    public static Song parseTrackJson(JSONObject trackJson) throws JSONException {
+        String name = trackJson.getString("name");
 
+        // Extracting artists
+        JSONArray artistsArray = trackJson.getJSONArray("artists");
+        String[] artists = new String[6];
+        for (int i = 0; i < artistsArray.length(); i++) {
+            JSONObject artistObject = artistsArray.getJSONObject(i);
+            artists[i] = artistObject.getString("name");
+        }
+
+        // Extracting album
+        JSONObject albumObject = trackJson.getJSONObject("album");
+        String albumName = albumObject.getString("name");
+
+        // Extracting image URL
+        JSONArray imagesArray = albumObject.getJSONArray("images");
+        String imageUrl = null;
+        if (imagesArray.length() > 0) {
+            JSONObject firstImage = imagesArray.getJSONObject(0);
+            imageUrl = firstImage.getString("url");
+        }
+
+        // Constructing Song object
+        return new Song(name, artists, imageUrl, albumName);
+    }
+
+    public interface OnSongsLoadedListener {
+        void onSongsLoaded(List<Song> songs);
+        void onError(String errorMessage);
+    }
+
+
+    // top artists + genres stuff
     public static void getUserTopArtists(String accessToken, OnArtistsLoadedListener listener) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()

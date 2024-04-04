@@ -25,7 +25,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="130dp"
-            android:layout_marginBottom="130dp">
+            android:layout_marginBottom="130dp"
+            >
+
+            <TextView
+                android:id="@+id/geminiResultTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="gemini result"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                />
 
             <TextView
                 android:id="@+id/genres"
@@ -49,7 +63,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topSongs"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/topSongs"
@@ -62,13 +77,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="453dp" />
+                tools:layout_editor_absoluteY="453dp"
+                android:layout_marginTop="15dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoriteSongList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,11 +94,10 @@
                 android:id="@+id/topArtists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_artists"
                 android:textColor="@color/white"
-
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -98,7 +113,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topAlbums"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:layout_marginTop="10dp" />
 
 
         </LinearLayout>

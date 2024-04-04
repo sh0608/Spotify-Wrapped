@@ -49,6 +49,15 @@ dependencies {
     implementation(files("../spotify-auth-release-2.1.0.aar"))
     implementation("androidx.browser:browser:1.8.0")
 
+    // add the dependency for the Google AI client SDK for Android
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.2")
+
+    // Required for one-shot operations (to use `ListenableFuture` from Reactive Streams)
+    implementation("com.google.guava:guava:31.0.1-android")
+
+    // Required for streaming operations (to use `Publisher` from Guava Android)
+    implementation("org.reactivestreams:reactive-streams:1.0.4")
+
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")

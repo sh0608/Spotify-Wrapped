@@ -16,6 +16,7 @@ import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
+import com.example.spotifywrapped.ui.GeminiApiHelper;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ import java.util.Map;
 public class WrapFragment extends Fragment {
 
     private FragmentWrapBinding  binding;
+    private String topSongsList;
+    private String topArtistsList;
+    private TextView geminiResult;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,11 +49,12 @@ public class WrapFragment extends Fragment {
         // initialize Top genre adapter + recyclerview
         RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
         topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        List<String> topGenres = new ArrayList<>();
-        TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
+        // topGenres = getTopGenres(topArtists);
+        TopGenreAdapter topGenreAdapter = new TopGenreAdapter(new ArrayList<>());
         topGenreRecyclerView.setAdapter(topGenreAdapter);
 
         // onChanged listener for Top Genres
+        // does it work if get rid of this bc artist already have?
         wrapViewModel.getGenresList().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> generes) {
@@ -77,8 +82,7 @@ public class WrapFragment extends Fragment {
         RecyclerView topArtistsRecyclerView = view.findViewById(R.id.topArtistsList);
         topArtistsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
-        List<Artist> topArtists = new ArrayList<>();
-        TopArtistAdapter topArtistAdapter = new TopArtistAdapter(topArtists);
+        TopArtistAdapter topArtistAdapter = new TopArtistAdapter(new ArrayList<>());
         topArtistsRecyclerView.setAdapter(topArtistAdapter);
 
         // onChanged listener for Top Artists
@@ -109,8 +113,7 @@ public class WrapFragment extends Fragment {
         // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
         topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        List<Song> topSongs = new ArrayList<>();
-        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongs);
+        TopSongAdapter topSongAdapter = new TopSongAdapter(new ArrayList<>());
         topSongsRecyclerView.setAdapter(topSongAdapter);
 
         //  onChanged listener for Top Songs
@@ -127,6 +130,7 @@ public class WrapFragment extends Fragment {
             @Override
             public void onSongsLoaded(List<Song> songs) {
                 wrapViewModel.updateSongsList(songs);
+                GeminiApiHelper.getResponseFromGemini(songs, wrapViewModel);
             }
 
             @Override
@@ -134,6 +138,14 @@ public class WrapFragment extends Fragment {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
                 String topSongsList = "Error loading top songs: " + errorMessage;
+            }
+        });
+
+        geminiResult = binding.geminiResultTextView;
+        wrapViewModel.getGeminiResult().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                geminiResult.setText(s);
             }
         });
 

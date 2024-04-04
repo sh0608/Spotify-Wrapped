@@ -4,27 +4,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.spotifywrapped.Album;
 import com.example.spotifywrapped.Artist;
 import com.example.spotifywrapped.Song;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class WrapViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText = new MutableLiveData<>();
+    private final MutableLiveData<String> geminiResult = new MutableLiveData<>();
     private MutableLiveData<List<Song>> songsList = new MutableLiveData<>();
     private MutableLiveData<List<Artist>> artistsList = new MutableLiveData<>();
 
     private MutableLiveData<List<String>> genresList = new MutableLiveData<>();
 
     public WrapViewModel() {
-        mText.setValue("This is home fragment");
+        geminiResult.setValue("");
         songsList.setValue(new ArrayList<>());
+        artistsList.setValue(new ArrayList<>());
         genresList.setValue(new ArrayList<>());
     }
 
@@ -53,15 +50,12 @@ public class WrapViewModel extends ViewModel {
         return genresList;
     }
 
-    public void updateText(String text) {
+    public void updateGeminiResult(String text) {
 
-        mText.setValue(text);
+        geminiResult.postValue(text);
     }
 
-
-
-
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getGeminiResult() {
+        return geminiResult;
     }
 }

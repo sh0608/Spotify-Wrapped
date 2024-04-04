@@ -6,6 +6,9 @@ public class Song {
     private String imageUrl;
     private String albumName;
 
+    private int minutesPlayed;
+    private int timesPlayed;
+
     public Song(String name, String[] artists, String imageUrl, String albumName) {
         this.name = name;
         this.artists = artists;
@@ -19,7 +22,18 @@ public class Song {
     }
 
     public String[] getArtists() {
-        return artists;
+        int numOfActualArtists = 0;
+        for (int i = 0; i < artists.length; i++) {
+            if (artists[i] != null) {
+                numOfActualArtists++;
+            }
+        }
+        String[] actualArtists = new String[numOfActualArtists];
+        for (int i = 0; i < numOfActualArtists ; i++) {
+            actualArtists[i] = artists[i];
+
+        }
+        return actualArtists;
     }
 
     public String getImageUrl() {
@@ -28,5 +42,11 @@ public class Song {
 
     public String getAlbum() {
         return albumName;
+    }
+    public int getMinutesPlayed() {
+        return minutesPlayed;
+    }
+    public int getTimesPlayed() {
+        return timesPlayed;
     }
 }

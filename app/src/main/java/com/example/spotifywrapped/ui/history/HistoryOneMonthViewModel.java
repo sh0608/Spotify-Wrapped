@@ -9,13 +9,12 @@ import com.example.spotifywrapped.Song;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryViewModel extends ViewModel {
-
+public class HistoryOneMonthViewModel extends ViewModel {
     private final MutableLiveData<String> mText = new MutableLiveData<>();
     private MutableLiveData<List<Song>> songsList = new MutableLiveData<>();
 
 
-    public HistoryViewModel() {
+    public HistoryOneMonthViewModel() {
         mText.setValue("This is history fragment");
         songsList.setValue(new ArrayList<>());
 

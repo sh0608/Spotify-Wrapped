@@ -10,6 +10,12 @@
     <!--  fragment_wrap.xml  -->
     <string name="title_wrap">Your Wrap</string>
     <string name="title_history">History</string>
+    <string name="view_past_wraps">View Past Wraps</string>
+    <string name="top_genres">Top Genres</string>
+    <string name="save_my_wrap">Save my wrap</string>
+    <string name="top_songs">Top Songs</string>
+    <string name="top_artists">Top Artists</string>
+    <string name="top_albums">Top Albums</string>
 
     <!--  fragment_update_account.xml  -->
     <string name="update_account_info">Update Account Info</string>
@@ -23,5 +29,9 @@
     <string name="update_account_info_navbar">Update Account Info</string>
     <string name="wrapped">Wrapped</string>
     <string name="history">History</string>
+    <string name="mixtape_memories">Mixtape Memories</string>
+    <string name="_1_month_wrapped">Past Month</string>
+    <string name="_6_months_wrapped">Past 6 Months</string>
+    <string name="all_time_wrapped">All-time</string>
 
 </resources>

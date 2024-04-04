@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/black"
+    android:layout_height="110dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="284dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/topSongTitle"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circular_spotifytext_black"
+            android:text="12. All Too Well"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/topSongAlbumTitle"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circular_spotifytext_black"
+            android:text="Red"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/topSongArtistName"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/circular_spotifytext_black"
+            android:text="Taylor Swift"
+            android:textColor="@color/offwhite"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/topSongImage"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@tools:sample/avatars" />
+</androidx.constraintlayout.widget.ConstraintLayout>

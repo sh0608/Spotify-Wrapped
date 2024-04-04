@@ -34,13 +34,7 @@ public class WrapFragment extends Fragment {
     private FragmentWrapBinding  binding;
     private String topSongsList;
     private String topArtistsList;
-
     private TextView textHome;
-    private List<Song> topSongs;
-    private List<Artist> topArtists;
-    private List<String> topGenres;
-
-    static List<Artist> dummy;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,10 +53,11 @@ public class WrapFragment extends Fragment {
         RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);
         topGenreRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         // topGenres = getTopGenres(topArtists);
-        TopGenreAdapter topGenreAdapter = new TopGenreAdapter(topGenres);
+        TopGenreAdapter topGenreAdapter = new TopGenreAdapter(new ArrayList<>());
         topGenreRecyclerView.setAdapter(topGenreAdapter);
 
         // onChanged listener for Top Genres
+        // does it work if get rid of this bc artist already have?
         wrapViewModel.getGenresList().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> generes) {
@@ -75,8 +70,8 @@ public class WrapFragment extends Fragment {
         RecyclerView topArtistsRecyclerView = view.findViewById(R.id.topArtistsList);
         topArtistsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
-        topArtists = new ArrayList<>();
-        TopArtistAdapter topArtistAdapter = new TopArtistAdapter(topArtists);
+//        topArtists = new ArrayList<>();
+        TopArtistAdapter topArtistAdapter = new TopArtistAdapter(new ArrayList<>());
         topArtistsRecyclerView.setAdapter(topArtistAdapter);
 
         // onChanged listener for Top Artists
@@ -99,9 +94,6 @@ public class WrapFragment extends Fragment {
                 for (Artist artist : artists) {
                     topArtistsList += artist.getName() + "\n";
                 }
-
-                dummy = artists;
-                wrapViewModel.updateText(topArtistsList.toString());
                 wrapViewModel.updateArtistsList(artists);
                 List<String> newGenres = getTopGenres(artists);
                 wrapViewModel.updateGenresList(newGenres);
@@ -115,13 +107,10 @@ public class WrapFragment extends Fragment {
             }
         });
 
-        wrapViewModel.updateText(topArtistsList);
-
         // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);
         topSongsRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        topSongs = new ArrayList<>();
-        TopSongAdapter topSongAdapter = new TopSongAdapter(topSongs);
+        TopSongAdapter topSongAdapter = new TopSongAdapter(new ArrayList<>());
         topSongsRecyclerView.setAdapter(topSongAdapter);
 
         //  onChanged listener for Top Songs
@@ -141,7 +130,6 @@ public class WrapFragment extends Fragment {
                 for (Song song : songs) {
                     topSongsList += song.getName() + "\n";
                 }
-                wrapViewModel.updateText(topSongsList.toString());
                 wrapViewModel.updateSongsList(songs);
             }
 

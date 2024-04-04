@@ -15,7 +15,7 @@
         android:fontFamily="@font/circular_spotifytext_black"
         android:text="1. Pop"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

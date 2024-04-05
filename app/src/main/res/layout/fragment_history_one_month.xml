@@ -9,7 +9,7 @@
     tools:context=".ui.history.HistoryOneMonth">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton_onemonth"
         style="@style/BACK_BUTTON"
         android:layout_width="50dp"
         android:layout_height="50dp"

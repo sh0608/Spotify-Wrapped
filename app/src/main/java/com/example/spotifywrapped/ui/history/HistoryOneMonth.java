@@ -46,7 +46,7 @@ public class HistoryOneMonth extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHistoryOneMonthBinding.inflate(inflater, container, false);
 
-        binding.imageButton.setOnClickListener(new View.OnClickListener() {
+        binding.imageButtonOnemonth.setOnClickListener(new View.OnClickListener() {
             @Override
             protected Object clone() throws CloneNotSupportedException {
                 return super.clone();
@@ -123,7 +123,7 @@ public class HistoryOneMonth extends Fragment {
                 Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
                 topArtistsList =  "Error loading top artists: " + errorMessage;
             }
-        });
+        }, SpotifyApiHelper.TimeFrame.SHORT);
 
         // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList_onemonth);

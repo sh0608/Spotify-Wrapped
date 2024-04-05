@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-
+// Made in tandem with my group
 public class Engine {
     private FirebaseFirestore db;
 

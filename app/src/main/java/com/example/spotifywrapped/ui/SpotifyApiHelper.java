@@ -53,6 +53,7 @@ public class SpotifyApiHelper {
         void onError(String errorMessage);
     }
 
+    //Base method to get a user's top songs, will be overloaded
     public static void getUserTopSongs(String accessToken, OnSongsLoadedListener listener) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -172,6 +173,7 @@ public class SpotifyApiHelper {
             }
         });
     }
+    //Creates a list of the user's top songs
     private static List<Song> parseTopSongsJson(String jsonData) throws JSONException {
         List<Song> topSongs = new ArrayList<>();
 
@@ -186,7 +188,7 @@ public class SpotifyApiHelper {
         return topSongs;
     }
 
-    //top artist stuff
+    //retrieves a user's top artists, handles needed exceptions
 
     public static void getUserTopArtists(String accessToken, OnArtistsLoadedListener listener) {
         OkHttpClient client = new OkHttpClient();
@@ -245,6 +247,7 @@ public class SpotifyApiHelper {
         return topArtists;
     }
 
+    //Creates artist object with imageurl
     private static Artist parseArtistJson(JSONObject artistJson) throws JSONException {
         String name = artistJson.getString("name");
         String followers = artistJson.getJSONObject("followers").getString("total");

@@ -1,28 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SCREEN_BACKGROUND"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SCREEN_BACKGROUND"
-    android:orientation="vertical"
+    android:background = "@color/black"
     tools:context=".ui.history.HistoryOneMonth">
 
-
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton_onemonth"
+        style="@style/BACK_BUTTON"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        style="@style/BACK_BUTTON"
-         />
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2_onemonth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/songsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="100dp" />
+    <ScrollView
+        android:id="@+id/scrollView2_onemonth"
+        android:layout_width="398dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="130dp"
+            android:orientation="vertical"
+            android:paddingBottom="130dp">
+
+            <TextView
+                android:id="@+id/genres_onemonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/top_genres"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="228dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genreList_onemonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/nav_view_onemonth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topSongs_onemonth"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/topSongs_onemonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/top_songs"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="453dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoriteSongList_onemonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topArtists_onemonth" />
+
+            <TextView
+                android:id="@+id/topArtists_onemonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="@string/top_artists"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favoriteSongList_onemonth" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topArtistsList_onemonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/topSongs_onemonth"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topAlbums_onemonth"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

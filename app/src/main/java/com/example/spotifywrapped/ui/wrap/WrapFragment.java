@@ -105,7 +105,7 @@ public class WrapFragment extends Fragment {
                 Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
                 topArtistsList =  "Error loading top artists: " + errorMessage;
             }
-        });
+        }, SpotifyApiHelper.TimeFrame.SHORT);
 
         // initialize Top Song adapter + recyclerview for Song List
         RecyclerView topSongsRecyclerView = view.findViewById(R.id.favoriteSongList);

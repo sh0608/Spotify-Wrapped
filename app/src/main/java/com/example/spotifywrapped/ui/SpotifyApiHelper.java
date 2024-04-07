@@ -189,12 +189,31 @@ public class SpotifyApiHelper {
 
 
     // top artists + genres stuff
-    public static void getUserTopArtists(String accessToken, OnArtistsLoadedListener listener) {
+    public static void getUserTopArtists(String accessToken, OnArtistsLoadedListener listener, TimeFrame timeframe) {
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(API_BASE_URL + "me/top/artists?time_range=short_term&limit=5&offset=0")
-                .addHeader("Authorization", "Bearer " + accessToken)
-                .build();
+        Request request;
+        switch (timeframe) {
+            case SHORT:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/artists?time_range=short_term&limit=5&offset=0")
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+            default:
+            case MEDIUM:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/artists?time_range=medium_term&limit=5&offset=0")
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+            case LONG:
+                request = new Request.Builder()
+                        .url(API_BASE_URL + "me/top/artists?time_range=long_term&limit=5&offset=0")
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+                break;
+
+        }
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -231,6 +250,8 @@ public class SpotifyApiHelper {
             }
         });
     }
+
+
 
     private static List<Artist> parseTopArtistsJson(String jsonData) throws JSONException {
         List<Artist> topArtists = new ArrayList<>();

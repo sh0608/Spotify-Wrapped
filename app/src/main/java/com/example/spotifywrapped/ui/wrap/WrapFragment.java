@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,16 @@ public class WrapFragment extends Fragment {
     private String topArtistsList;
     private TextView geminiResult;
 
+    private WrapViewModel wrapViewModel;
+
+    private Button btnShortTerm;
+    private Button btnMediumTerm;
+    private Button btnLongTerm;
+    private Button[] allButtons;
+
+    private SpotifyApiHelper.TimeFrame selectedTimeFrame = SpotifyApiHelper.TimeFrame.SHORT; // default
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentWrapBinding.inflate(inflater, container, false);
@@ -46,7 +57,7 @@ public class WrapFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        WrapViewModel wrapViewModel =
+        wrapViewModel =
                 new ViewModelProvider(this).get(WrapViewModel.class);
         String token = TokenManager.getToken(requireContext());
 
@@ -150,6 +161,22 @@ public class WrapFragment extends Fragment {
             }
         });
 
+
+
+        btnShortTerm = view.findViewById(R.id.btnShortTerm);
+        btnMediumTerm = view.findViewById(R.id.btnMediumTerm);
+        btnLongTerm = view.findViewById(R.id.btnLongTerm);
+
+        allButtons = new Button[]{btnShortTerm, btnMediumTerm, btnLongTerm};
+
+        btnShortTerm.setOnClickListener(v -> updateButtonStates(btnShortTerm));
+        btnMediumTerm.setOnClickListener(v -> updateButtonStates(btnMediumTerm));
+        btnLongTerm.setOnClickListener(v -> updateButtonStates(btnLongTerm));
+
+        // Set initial state
+        updateButtonStates(btnShortTerm);
+
+
     }
 
 
@@ -184,6 +211,65 @@ public class WrapFragment extends Fragment {
         return topGenreList;
     }
 
+    private void updateButtonStates(Button selectedButton) {
+        for (Button button : allButtons) {
+            button.setSelected(button == selectedButton);
+        }
+        updateTimeFrame(selectedButton);
+    }
+
+    private void updateTimeFrame(Button selectedButton) {
+        // Determine the time frame based on the button and update data
+        if (selectedButton == btnShortTerm) {
+            selectedTimeFrame = SpotifyApiHelper.TimeFrame.SHORT;
+        } else if (selectedButton == btnMediumTerm) {
+            selectedTimeFrame = SpotifyApiHelper.TimeFrame.MEDIUM;
+        } else if (selectedButton == btnLongTerm) {
+            selectedTimeFrame = SpotifyApiHelper.TimeFrame.LONG;
+        }
+        loadDataBasedOnTimeFrame();
+    }
+    private void loadDataBasedOnTimeFrame() {
+        String token = TokenManager.getToken(requireContext());
+        SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
+            @Override
+            public void onSongsLoaded(List<Song> songs) {
+                topSongsList = "";
+                for (Song song : songs) {
+                    topSongsList += song.getName() + "\n";
+                }
+                wrapViewModel.updateSongsList(songs);
+                GeminiApiHelper.getResponseFromGemini(songs, wrapViewModel);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
+                topSongsList = "Error loading top songs: " + errorMessage;
+            }
+        }, selectedTimeFrame);
+
+        SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
+            @Override
+            public void onArtistsLoaded(List<Artist> artists) {
+                topArtistsList = "";
+                for (Artist artist : artists) {
+                    topArtistsList += artist.getName() + "\n";
+                }
+                wrapViewModel.updateArtistsList(artists);
+                List<String> newGenres = getTopGenres(artists);
+                wrapViewModel.updateGenresList(newGenres);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Handle the error here
+                Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
+                topArtistsList =  "Error loading top artists: " + errorMessage;
+            }
+        }, selectedTimeFrame);
+    }
 
     @Override
     public void onDestroyView() {

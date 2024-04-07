@@ -2,6 +2,8 @@ package com.example.spotifywrapped.ui.update_account;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +13,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.spotifywrapped.R;
+import com.example.spotifywrapped.databinding.FragmentUpdateAccountBinding;
+import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 
 public class UpdateAccount extends Fragment {
 
     private UpdateAccountViewModel mViewModel;
+    private FragmentUpdateAccountBinding binding;
 
     public static UpdateAccount newInstance() {
         return new UpdateAccount();
@@ -25,7 +31,38 @@ public class UpdateAccount extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_update_account, container, false);
+        binding = FragmentUpdateAccountBinding.inflate(inflater, container, false);
+
+        UpdateAccountViewModel updateAccountViewModel = new ViewModelProvider(this).get(UpdateAccountViewModel.class);
+        View view = binding.getRoot();
+        return view;
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        UpdateAccountViewModel updateAccountViewModel = new ViewModelProvider(this).get(UpdateAccountViewModel.class);
+
+        Button changeButton = view.findViewById(R.id.change_username_button);
+        changeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://www.spotify.com/us/account/profile/";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        Button deleteButton = view.findViewById(R.id.delete_account_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://www.spotify.com/us/account/close/";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

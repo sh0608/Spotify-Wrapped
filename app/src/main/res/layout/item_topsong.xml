@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    style="@style/SCREEN_BACKGROUND"
     android:layout_height="110dp">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="12. All Too Well"
-            android:textColor="@color/white"
+            style="@style/TEXT"
             android:textSize="16sp" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="Red"
-            android:textColor="@color/white"
+            style="@style/TEXT"
             android:textSize="14sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/circular_spotifytext_black"
             android:text="Taylor Swift"
-            android:textColor="@color/offwhite"
+            style="@style/TEXT"
             android:textSize="14sp" />
     </LinearLayout>
 

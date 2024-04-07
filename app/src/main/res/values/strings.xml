@@ -20,18 +20,21 @@
     <!--  fragment_update_account.xml  -->
     <string name="update_account_info">Update Account Info</string>
     <string name="change_password">Change Password</string>
-    <string name="change_username_or_email">Change Username or Email</string>
+    <string name="change_username_or_email">Update Login Info</string>
     <string name="delete_account">Delete Account</string>
     <string name="spotify_icon">spotify icon</string>
 
     <!--  navbar  -->
     <string name="home">Home</string>
-    <string name="update_account_info_navbar">Update Account Info</string>
+    <string name="update_account_info_navbar">Account</string>
     <string name="wrapped">Wrapped</string>
     <string name="history">History</string>
     <string name="mixtape_memories">Mixtape Memories</string>
     <string name="_1_month_wrapped">Past Month</string>
     <string name="_6_months_wrapped">Past 6 Months</string>
     <string name="all_time_wrapped">All-time</string>
+    <string name="one_month">One Month</string>
+    <string name="six_months">Six Months</string>
+    <string name="all_time">All Time</string>
 
 </resources>

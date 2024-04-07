@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
+    style="@style/SCREEN_BACKGROUND"
+
     android:layout_height="35dp">
 
     <TextView
@@ -14,7 +15,7 @@
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/circular_spotifytext_black"
         android:text="1. Pop"
-        android:textColor="@color/white"
+        style="@style/TEXT"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

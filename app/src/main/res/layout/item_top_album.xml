@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="186dp"
     android:layout_height="186dp"
-    android:background="@color/black">
+    style="@style/SCREEN_BACKGROUND"
+    >
 
     <LinearLayout
         android:layout_width="186dp"
@@ -25,7 +26,7 @@
             android:id="@+id/albumName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            style="@style/TEXT"
             android:fontFamily="@font/circular_spotifytext_black"
             android:textSize="16sp"
             android:text="Red"
@@ -35,7 +36,7 @@
             android:id="@+id/albumArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            style="@style/TEXT"
             android:fontFamily="@font/circular_spotifytext_blackitalic"
             android:textSize="14sp"
             android:text="Taylor Swift"

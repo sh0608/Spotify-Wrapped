@@ -5,7 +5,6 @@
     style="@style/SCREEN_BACKGROUND"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@color/black"
     tools:context=".ui.history.HistoryOneMonth">
 
     <ImageButton
@@ -43,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_genres"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -69,7 +68,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_songs"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -93,7 +92,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_artists"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

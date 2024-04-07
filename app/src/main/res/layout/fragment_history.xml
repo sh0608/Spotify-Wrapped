@@ -31,6 +31,7 @@
     <TextView
         android:id="@+id/textview_mixtape_memories"
         style="@style/TEXT"
+        android:layout_marginTop="100dp"
         android:layout_width="277dp"
         android:layout_height="119dp"
         android:fontFamily="@font/circular_spotifytext_bold"
@@ -49,7 +50,7 @@
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/gradient_history_one_month"
         android:text="@string/_1_month_wrapped"
         app:layout_constraintBottom_toTopOf="@+id/button2"

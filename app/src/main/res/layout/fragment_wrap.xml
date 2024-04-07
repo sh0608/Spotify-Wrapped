@@ -5,7 +5,6 @@
     style="@style/SCREEN_BACKGROUND"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@color/black"
     tools:context=".ui.wrap.WrapFragment">
 
     <ScrollView
@@ -13,7 +12,7 @@
         android:layout_width="398dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
@@ -23,23 +22,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="130dp"
+            android:layout_marginTop="23dp"
             android:layout_marginBottom="130dp"
-            >
+            android:orientation="vertical"
+            android:paddingBottom="115dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="35dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnShortTerm"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button_toggle_selector"
+                    android:text="@string/one_month" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMediumTerm"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_toggle_selector"
+
+                    android:text="@string/six_months" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLongTerm"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_toggle_selector"
+                    android:text="@string/all_time" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/geminiResultTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/circular_spotifytext_black"
-                android:text="gemini result"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginBottom="15dp"
-                />
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:gravity="center"
+                android:text="gemini result"
+                style="@style/TEXT"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/genres"
@@ -47,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_genres"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -58,27 +89,28 @@
                 android:id="@+id/genreList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/SCREEN_BACKGROUND"
                 app:layout_constraintBottom_toTopOf="@+id/nav_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topSongs"
-                app:layout_constraintVertical_bias="0.0"
-                android:layout_marginTop="10dp" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/topSongs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_songs"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="453dp"
-                android:layout_marginTop="15dp"/>
+                tools:layout_editor_absoluteY="453dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoriteSongList"
@@ -97,7 +129,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_artists"
-                android:textColor="@color/white"
+                style="@style/TEXT"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -108,13 +140,13 @@
                 android:id="@+id/topArtistsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/topSongs"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topAlbums"
-                app:layout_constraintVertical_bias="0.0"
-                android:layout_marginTop="10dp" />
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </LinearLayout>

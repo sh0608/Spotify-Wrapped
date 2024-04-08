@@ -7,13 +7,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class User {
-    private String id;
     private String username;
     private String email;
     private List<User> friends;
 
-    public User(String id, String username, String email) {
-        this.id = id;
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
         friends = new ArrayList<User>();
@@ -26,7 +24,6 @@ public class User {
         return friends.contains(u);
     }
 
-    public String getId() { return this.id; }
     public String getUsername() { return this.username; }
     public String getEmail() { return this.email; }
     public List<User> getFriends() { return this.friends; }

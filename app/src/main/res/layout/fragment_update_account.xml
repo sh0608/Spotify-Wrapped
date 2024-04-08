@@ -68,6 +68,25 @@
         app:layout_constraintTop_toBottomOf="@+id/update_login_textview"
         app:layout_constraintVertical_bias="0.722" />
 
+    <Button
+        android:id="@+id/friends_button"
+        android:layout_width="250dp"
+        android:layout_height="62dp"
+
+
+        android:layout_marginTop="48dp"
+
+        android:backgroundTint="@color/spotifyGreen"
+        android:fontFamily="@font/circular_spotify"
+        android:text="Friends"
+
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_username_button" />
+
     <ImageView
         android:src="@drawable/transparent"
         android:layout_width="135dp"

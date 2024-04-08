@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_update_to_navigation_history_one_month2"
             app:destination="@id/navigation_history_one_month" />
+        <action
+            android:id="@+id/action_navigation_update_to_navigation_friends"
+            app:destination="@id/navigation_friends" />
     </fragment>
 
 
@@ -69,6 +72,16 @@
         <action
             android:id="@+id/action_navigation_history_all_time_to_navigation_history"
             app:destination="@id/navigation_history" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_friends"
+        android:name="com.example.spotifywrapped.ui.update_account.Friends"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_navigation_friends_to_navigation_update"
+            app:destination="@id/navigation_update" />
     </fragment>
 
 </navigation>

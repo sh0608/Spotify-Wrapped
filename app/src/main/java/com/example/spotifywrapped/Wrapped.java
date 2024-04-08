@@ -3,6 +3,9 @@ package com.example.spotifywrapped;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
 
 public class Wrapped {
     private List<Song> songs = new ArrayList<>();
@@ -22,6 +25,12 @@ public class Wrapped {
 
     public List<Song> getTopSongs() {
         return songs;
+    }
+    public List<Song> getSongs() {
+        return songs;
+    }
+    public List<Artist> getArtists() {
+        return artists;
     }
 
     public List<Album> getAlbums() {

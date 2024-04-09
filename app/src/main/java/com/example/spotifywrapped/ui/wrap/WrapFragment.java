@@ -1,6 +1,8 @@
 package com.example.spotifywrapped.ui.wrap;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,11 @@ import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.GeminiApiHelper;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
+import com.example.spotifywrapped.MainActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,6 +50,7 @@ public class WrapFragment extends Fragment {
     private Button btnShortTerm;
     private Button btnMediumTerm;
     private Button btnLongTerm;
+    private Button btnExportAsImage;
     private Button[] allButtons;
 
     private SpotifyApiHelper.TimeFrame selectedTimeFrame = SpotifyApiHelper.TimeFrame.SHORT; // default
@@ -166,12 +174,19 @@ public class WrapFragment extends Fragment {
         btnShortTerm = view.findViewById(R.id.btnShortTerm);
         btnMediumTerm = view.findViewById(R.id.btnMediumTerm);
         btnLongTerm = view.findViewById(R.id.btnLongTerm);
+        btnExportAsImage = view.findViewById(R.id.exportAsImage);
 
         allButtons = new Button[]{btnShortTerm, btnMediumTerm, btnLongTerm};
 
         btnShortTerm.setOnClickListener(v -> updateButtonStates(btnShortTerm));
         btnMediumTerm.setOnClickListener(v -> updateButtonStates(btnMediumTerm));
         btnLongTerm.setOnClickListener(v -> updateButtonStates(btnLongTerm));
+        btnExportAsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportScreenAsImage();
+            }
+        });
 
         // Set initial state
         updateButtonStates(btnShortTerm);
@@ -269,6 +284,38 @@ public class WrapFragment extends Fragment {
                 topArtistsList =  "Error loading top artists: " + errorMessage;
             }
         }, selectedTimeFrame);
+    }
+
+    // Method to capture screenshot of a view
+    private Bitmap captureScreenshot(View view) {
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    // Method to save bitmap as image file
+    private void saveBitmap(Bitmap bitmap) {
+        try {
+            File directory = new File(Environment.getExternalStorageDirectory() + "/Screenshots");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            File file = new File(directory, "screenshot.png");
+            OutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Example usage in your activity
+    private void exportScreenAsImage() {
+        View rootView = requireActivity().getWindow().getDecorView().getRootView(); // Get root view of the activity
+        Bitmap screenshotBitmap = captureScreenshot(rootView);
+        saveBitmap(screenshotBitmap);
     }
 
     @Override

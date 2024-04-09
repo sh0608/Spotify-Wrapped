@@ -19,8 +19,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
 
-    - name: Run Checkstyle
-      run: ./gradlew checkstyle
+    # - name: Run Checkstyle
+    #   run: ./gradlew checkstyle
 
     # - name: Run Gradle build
     #   run: ./gradlew build

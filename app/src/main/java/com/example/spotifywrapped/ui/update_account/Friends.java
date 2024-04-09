@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotifywrapped.Engine;
@@ -24,6 +25,7 @@ import java.util.List;
 public class Friends extends Fragment {
     private FriendsViewModel mViewModel;
     private FragmentFriendsBinding binding;
+    private
     Engine engine = new Engine();
 
     private List<User> friendsList = new ArrayList<>();
@@ -40,6 +42,8 @@ public class Friends extends Fragment {
                 new ViewModelProvider(this).get(UpdateAccountViewModel.class);
         binding = FragmentFriendsBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = binding.usersRecyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         View root = binding.getRoot();
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override

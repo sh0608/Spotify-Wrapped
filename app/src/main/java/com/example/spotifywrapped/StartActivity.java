@@ -44,29 +44,29 @@ public class StartActivity extends AppCompatActivity {
     protected void setUpFirebase() {
         engine = new Engine();
 
-//        engine.addUser("user1", "user1@g");
-//        engine.addUser("user2", "user2@g");
-//        engine.addUser("user3", "user3@g");
-//        engine.addUser("user4", "user4@g");
-//
-//        engine.addConnection("user1","user2");
-//        engine.addConnection("user1","user3");
-//        engine.addConnection("user3","user2");
-//        engine.addConnection("user4","user1");
-//        engine.addConnection("user4","user2");
-//
-//        engine.acceptConnection("user1","user2");
-//
-//        engine.getConnections("user1").thenAccept(users -> {
-//            for (User user : users) {
-//                Log.d("LOG_TAG", user.getUsername());
-//            }
-//
-//        }).exceptionally(e -> {
-//            Log.e("LOG_TAG", e.getMessage());
-//            return null;
-//        });
-        test_1();
+        engine.addUser("user1", "user1@g");
+        engine.addUser("user2", "user2@g");
+        engine.addUser("user3", "user3@g");
+        engine.addUser("user4", "user4@g");
+
+        engine.addConnection("user1","user2");
+        engine.addConnection("user1","user3");
+        engine.addConnection("user3","user2");
+        engine.addConnection("user4","user1");
+        engine.addConnection("user4","user2");
+
+        engine.acceptConnection("user1","user2");
+
+        engine.getConnections("user1").thenAccept(users -> {
+            for (String user : users) {
+                Log.d("LOG_TAG", user);
+            }
+
+        }).exceptionally(e -> {
+            Log.e("LOG_TAG", e.getMessage());
+            return null;
+        });
+//        test_1();
     }
 
     protected void test_1() {

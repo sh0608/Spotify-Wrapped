@@ -38,24 +38,77 @@ public class Engine {
     /**
      * Adds a user to the database
      * @param username username of user to be added
-     * @param email email of user to be added
+     * @param password password of user to be added
      */
-    public void addUser(String username, String email) {
+    public CompletableFuture<Boolean> addUser(String username, String password) {
+        CompletableFuture<Boolean> result = new CompletableFuture<>();
 
         db.collection("user-info")
                 .get()
-                .addOnCompleteListener(task_i -> {
-                    if (task_i.isSuccessful()) {
-                        boolean flg = false;
-                        for (QueryDocumentSnapshot doc : task_i.getResult()) {
-                            if(username.equals(doc.getString("username")) || email.equals(doc.getString("email"))) {
-                                flg = true;
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        boolean exists = false;
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            if (username.equals(doc.getString("username"))) {
+                                exists = true;
+                                break;
                             }
                         }
-                        if(!flg){
-                            User u = new User(username, email);
-                            db.collection("user-info").document(u.getUsername()).set(u);
+                        if (!exists) {
+                            Map<String, Object> item = new HashMap<>();
+                            item.put("username", username);
+                            item.put("password", password);
+                            item.put("spotify_id", "");
+
+                            db.collection("user-info").document(username).set(item)
+                                    .addOnSuccessListener(aVoid -> result.complete(true))
+                                    .addOnFailureListener(e -> result.complete(false));
+                        } else {
+                            result.complete(false);
                         }
+                    } else {
+                        result.completeExceptionally(task.getException());
+                    }
+                });
+
+        return result;
+    }
+
+    public CompletableFuture<Boolean> checkLogin(String username, String password) {
+        CompletableFuture<Boolean> result = new CompletableFuture<>();
+
+        db.collection("user-info")
+                .whereEqualTo("username", username)
+                .whereEqualTo("password", password)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            result.complete(true);
+                        } else {
+                            result.complete(false);
+                        }
+                    } else {
+                        result.completeExceptionally(task.getException());
+                    }
+                });
+
+        return result;
+    }
+
+    public void setSpotifyId(String username, String spotify_id) {
+        db.collection("user-info")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String docId = document.getId();
+                            db.collection("user-info").document(docId)
+                                    .update("spotify_id", spotify_id);
+                        }
+                    } else {
+                        System.out.println("Error finding user: " + task.getException());
                     }
                 });
     }
@@ -168,9 +221,9 @@ public class Engine {
         item.put("pending", 0);
         db.collection("connections").document(hsh).set(item);
     }
-    public CompletableFuture<List<User>> getConnections(String username) {
-        CompletableFuture<List<User>> future = new CompletableFuture<>();
-        List<User> out = new CopyOnWriteArrayList<>();
+    public CompletableFuture<List<String>> getConnections(String username) {
+        CompletableFuture<List<String>> future = new CompletableFuture<>();
+        List<String> out = new CopyOnWriteArrayList<>();
 
         Task<QuerySnapshot> task1 = db.collection("connections")
                 .whereEqualTo("u_1", username)
@@ -196,8 +249,7 @@ public class Engine {
                                     .addOnCompleteListener(task_i -> {
                                         if (task_i.isSuccessful()) {
                                             for (QueryDocumentSnapshot doc : task_i.getResult()) {
-                                                User user = new User(doc.getString("username"), doc.getString("email"));
-                                                out.add(user);
+                                                out.add(doc.getString("username"));
                                             }
                                             if (out.size() >= (task1.getResult().size() + task2.getResult().size())) {
                                                 future.complete(out);

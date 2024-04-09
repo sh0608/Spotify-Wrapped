@@ -55,7 +55,7 @@
         android:backgroundTint="@color/spotifyGreen"
 
 
-        android:fontFamily="@font/circular_spotify"
+        android:fontFamily="@font/circular_spotifytext_black"
 
         android:text="@string/change_username_or_email"
         android:textColor="@color/white"

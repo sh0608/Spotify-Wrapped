@@ -42,6 +42,10 @@ public class Engine {
      */
     public CompletableFuture<Boolean> addUser(String username, String password) {
         CompletableFuture<Boolean> result = new CompletableFuture<>();
+        if(password.length() == 0) {
+            result.complete(false);
+            return result;
+        }
 
         db.collection("user-info")
                 .get()
@@ -76,6 +80,10 @@ public class Engine {
 
     public CompletableFuture<Boolean> checkLogin(String username, String password) {
         CompletableFuture<Boolean> result = new CompletableFuture<>();
+        if(password.length() == 0) {
+            result.complete(false);
+            return result;
+        }
 
         db.collection("user-info")
                 .whereEqualTo("username", username)

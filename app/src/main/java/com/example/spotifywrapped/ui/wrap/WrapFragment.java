@@ -1,14 +1,20 @@
 package com.example.spotifywrapped.ui.wrap;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +34,7 @@ import com.example.spotifywrapped.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -294,28 +301,50 @@ public class WrapFragment extends Fragment {
         return bitmap;
     }
 
-    // Method to save bitmap as image file
-    private void saveBitmap(Bitmap bitmap) {
-        try {
-            File directory = new File(Environment.getExternalStorageDirectory() + "/Screenshots");
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            File file = new File(directory, "screenshot.png");
-            OutputStream outputStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Example usage in your activity
     private void exportScreenAsImage() {
         View rootView = requireActivity().getWindow().getDecorView().getRootView(); // Get root view of the activity
+        btnExportAsImage.setEnabled(false); // Disable the button to prevent multiple clicks
+
         Bitmap screenshotBitmap = captureScreenshot(rootView);
-        saveBitmap(screenshotBitmap);
+
+        // Save the bitmap to the Photos app
+        Uri savedUri = saveBitmapToPhotos(screenshotBitmap);
+        if (savedUri != null) {
+            // Show a success message or perform any additional actions
+            Toast.makeText(requireContext(), "Screenshot saved to Photos app", Toast.LENGTH_SHORT).show();
+        } else {
+            // Show an error message or handle the failure case
+            Toast.makeText(requireContext(), "Failed to save screenshot", Toast.LENGTH_SHORT).show();
+        }
+
+        btnExportAsImage.setEnabled(true); // Re-enable the button
+    }
+
+    private Uri saveBitmapToPhotos(Bitmap bitmap) {
+        Context context = requireContext().getApplicationContext();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, "Screenshot_" + System.currentTimeMillis() + ".jpg");
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        contentValues.put(MediaStore.Images.Media.WIDTH, bitmap.getWidth());
+        contentValues.put(MediaStore.Images.Media.HEIGHT, bitmap.getHeight());
+
+        ContentResolver resolver = context.getContentResolver();
+        Uri uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+        if (uri != null) {
+            try {
+                OutputStream outputStream = resolver.openOutputStream(uri);
+                if (outputStream != null) {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return uri;
     }
 
     @Override

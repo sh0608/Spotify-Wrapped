@@ -19,8 +19,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
 
-    # - name: Run Checkstyle
-    #   run: gradle check --stacktrace
+    - name: Run Checkstyle
+      run: gradle check --stacktrace
 
     - name: Upload Checkstyle Report
       uses: actions/upload-artifact@v2

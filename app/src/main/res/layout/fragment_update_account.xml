@@ -36,17 +36,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="244dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="@font/circular_spotifytext_bold"
 
         android:text="@string/update_account_info"
         android:textSize="35sp"
+        app:layout_constraintTop_toBottomOf="@id/spotifyLogo"
         app:layout_constraintBottom_toTopOf="@+id/changeUsernameEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.616"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/change_username_button"
@@ -69,13 +68,15 @@
         app:layout_constraintTop_toBottomOf="@+id/changePasswordEditText" />
 
     <ImageView
+        android:id="@+id/spotifyLogo"
         android:layout_width="135dp"
         android:layout_height="110dp"
+        android:layout_marginTop="240dp"
+
+
         android:contentDescription="@string/spotify_icon"
 
-
         android:src="@drawable/transparent"
-
         app:layout_constraintBottom_toTopOf="@+id/update_login_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

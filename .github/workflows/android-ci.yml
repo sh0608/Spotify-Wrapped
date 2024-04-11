@@ -47,7 +47,7 @@ jobs:
         path: downloads 
 
     - name: list files
-      run: ls
+      run: ls app
 
 
     # - run: mkdir -p $GITHUB_WORKSPACE

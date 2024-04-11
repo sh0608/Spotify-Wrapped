@@ -100,19 +100,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_username_button" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/changeUsernameEditText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:fontFamily="@font/circular_spotifytext_bold"-->
-<!--        android:hint="@string/new_username"-->
-<!--        android:inputType="text"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.422" />-->
+    <EditText
+        android:id="@+id/changeUsernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/circular_spotifytext_bold"
+        android:hint="@string/new_username"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422" />
 
     <EditText
         android:id="@+id/changePasswordEditText"

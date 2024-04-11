@@ -21,6 +21,59 @@ import android.os.Handler;
 public class SpotifyApiHelper {
     private static final String API_BASE_URL = "https://api.spotify.com/v1/";
 
+    public static void getUserId(String accessToken, OnIdLoadedListener listener) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(API_BASE_URL + "me")
+                .addHeader("Authorization", "Bearer " + accessToken)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                // Execute the callback on the main thread
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    listener.onError(e.getMessage());
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    // If response is not successful, execute the callback with an error message
+                    String errorMessage = "Unexpected response code: " + response.code();
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(errorMessage);
+                    });
+                    return;
+                }
+
+                try {
+                    String jsonData = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonData);
+                    String id = jsonObject.getString("id");
+
+                    // Execute the callback on the main thread
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onIdLoaded(id);
+                    });
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                    // Execute the callback with an error message
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        listener.onError(e.getMessage());
+                    });
+                }
+            }
+        });
+    }
+
+    public interface OnIdLoadedListener {
+        void onIdLoaded(String id);
+        void onError(String errorMessage);
+    }
     // top songs stuff
     public enum TimeFrame {
         SHORT, MEDIUM, LONG

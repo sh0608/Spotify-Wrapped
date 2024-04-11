@@ -1,10 +1,15 @@
 package com.example.spotifywrapped.ui.wrap;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
+// <<<<<<< fixLogin3
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.content.SharedPreferences;
+// =======
+// import android.content.ContentResolver;
+// import android.content.ContentValues;
+// import android.content.Context;
+// import android.graphics.Bitmap;
+// import android.net.Uri;
+// >>>>>>> main
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.spotifywrapped.Artist;
+import com.example.spotifywrapped.Engine;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.Song;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
@@ -52,16 +58,19 @@ public class WrapFragment extends Fragment {
     private String topArtistsList;
 
     private TextView geminiResult;
+
     private TextView geminiResultArtists;
 
-    private WrapViewModel wrapViewModel;
 
+    private WrapViewModel wrapViewModel;
     private Button btnShortTerm;
     private Button btnMediumTerm;
     private Button btnLongTerm;
     private Button btnExportAsImage;
     private Button[] allButtons;
-
+    private Engine engine;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
     private SpotifyApiHelper.TimeFrame selectedTimeFrame = SpotifyApiHelper.TimeFrame.SHORT; // default
 
 
@@ -77,6 +86,24 @@ public class WrapFragment extends Fragment {
         wrapViewModel =
                 new ViewModelProvider(this).get(WrapViewModel.class);
         String token = TokenManager.getToken(requireContext());
+
+        // store the spotify id in firebase
+        sharedPreferences = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String username = sharedPreferences.getString("username", "default");
+        SpotifyApiHelper.getUserId(token, new SpotifyApiHelper.OnIdLoadedListener() {
+            @Override
+            public void onIdLoaded(String id) {
+                engine = new Engine();
+                engine.setSpotifyId(username,id);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e("SpotifyApiHelperUSERID", "Error loading id: " + errorMessage);
+            }
+        });
+
 
         // initialize Top genre adapter + recyclerview
         RecyclerView topGenreRecyclerView = view.findViewById(R.id.genreList);

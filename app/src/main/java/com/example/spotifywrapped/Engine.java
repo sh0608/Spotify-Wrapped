@@ -121,6 +121,23 @@ public class Engine {
                 });
     }
 
+    public void setPassword(String username, String password) {
+        db.collection("user-info")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String docId = document.getId();
+                            db.collection("user-info").document(docId)
+                                    .update("password", password);
+                        }
+                    } else {
+                        System.out.println("Error finding user: " + task.getException());
+                    }
+                });
+    }
+
 
     /**
      * Deletes a user to the database

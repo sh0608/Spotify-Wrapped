@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.spotifywrapped.AppLoginActivity;
+import com.example.spotifywrapped.Engine;
 import com.example.spotifywrapped.R;
 import com.example.spotifywrapped.databinding.FragmentUpdateAccountBinding;
 import com.example.spotifywrapped.databinding.FragmentWrapBinding;
@@ -23,6 +26,7 @@ public class UpdateAccount extends Fragment {
 
     private UpdateAccountViewModel mViewModel;
     private FragmentUpdateAccountBinding binding;
+    private Engine engine;
 
     public static UpdateAccount newInstance() {
         return new UpdateAccount();
@@ -46,10 +50,24 @@ public class UpdateAccount extends Fragment {
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://www.spotify.com/us/account/profile/";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
+                engine.
+                engine.checkLogin(username, password).thenAccept(loggedIn -> {
+                    if (loggedIn) {
+                        editor.putString("username", username);
+                        editor.putString("password", password);
+                        editor.apply();
+                        goToSpotifyLogin();
+                    } else {
+                        Toast.makeText(AppLoginActivity.this,
+                                "Login unsuccessful. Check your login information or create an account!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+//                String url = "https://www.spotify.com/us/account/profile/";
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(url));
+//                startActivity(intent);
             }
         });
 
@@ -57,10 +75,10 @@ public class UpdateAccount extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://www.spotify.com/us/account/close/";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
+//                String url = "https://www.spotify.com/us/account/close/";
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(url));
+//                startActivity(intent);
             }
         });
     }

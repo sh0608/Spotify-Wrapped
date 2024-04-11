@@ -46,13 +46,16 @@ jobs:
         name: assets-for-downloads
         path: downloads 
 
+    - name: list files
+      run: ls
 
-    - run: mkdir -p $GITHUB_WORKSPACE
-    - run: echo hello > $GITHUB_WORKSPACE/build.gradle
-    - uses: actions/upload-artifact@v4
-      with:
-        name: my-artifact
-        path: $GITHUB_WORKSPACE/build.gradle
+
+    # - run: mkdir -p $GITHUB_WORKSPACE
+    # - run: echo hello > $GITHUB_WORKSPACE/build.gradle
+    # - uses: actions/upload-artifact@v4
+    #   with:
+    #     name: my-artifact
+    #     path: $GITHUB_WORKSPACE/build.gradle
 
         
       

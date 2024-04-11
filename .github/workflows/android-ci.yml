@@ -31,23 +31,28 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v3
 
-    - name: make new directory
-      run: mkdir downloads
+    # - name: make new directory
+    #   run: mkdir downloads
 
-    - name: go into new directory
-      run: |
-        cd downloads
-        echo "$GITHUB_WORKSPACE" > testing.txt
-        cd ..
+    # - name: go into new directory
+    #   run: |
+    #     cd downloads
+    #     echo "$GITHUB_WORKSPACE" > testing.txt
+    #     cd ..
 
-    - name: upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: assets-for-downloads
-        path: downloads 
+    # - name: upload artifact
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: assets-for-downloads
+    #     path: downloads 
 
-    - name: list files
-      run: ls app
+    # - name: list files
+    #   run: ls app
+
+
+    # Compile the project and generate an APK to verify that the build process completes without errors.
+    - name: Build debug APK
+      run: ./gradlew assembleDebug
 
 
     # - run: mkdir -p $GITHUB_WORKSPACE

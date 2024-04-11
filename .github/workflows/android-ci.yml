@@ -37,7 +37,7 @@ jobs:
     - name: go into new directory
       run: |
         cd downloads
-        echo 'testing' > testing.html
+        echo "$GITHUB_WORKSPACE" > testing.txt
         cd ..
 
     - name: upload artifact
@@ -45,4 +45,6 @@ jobs:
       with:
         name: assets-for-downloads
         path: downloads 
+
+        
       

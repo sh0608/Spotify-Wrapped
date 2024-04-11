@@ -28,8 +28,8 @@ jobs:
     #     name: checkstyle-report
     #     path: Spotify-Wrapped/app/build/reports/checkstyle/checkstyle.html
 
-    # - name: gradle build
-    #   run: ./gradlew build
+    - name: gradle build
+      run: ./gradlew build
 
     - name: make new directory
       run: mkdir downloads

@@ -67,7 +67,6 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
-                android:gravity="center"
                 android:text="gemini result"
                 style="@style/TEXT"
                 android:textSize="20sp" />

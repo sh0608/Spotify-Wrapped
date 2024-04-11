@@ -22,11 +22,26 @@ jobs:
     # - name: Run Checkstyle
     #   run: gradle check --stacktrace
 
-    - name: Upload Checkstyle Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: checkstyle-report
-        path: Spotify-Wrapped/app/build/reports/checkstyle/checkstyle.html
+    # - name: Upload Checkstyle Report
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: checkstyle-report
+    #     path: Spotify-Wrapped/app/build/reports/checkstyle/checkstyle.html
 
-    - name: gradle build
-      run: ./gradlew build
+    # - name: gradle build
+    #   run: ./gradlew build
+
+    - name: make new directory
+      run: mkdir actions_downloads
+
+    - name: go into new directory
+      run: 
+        cd actions_downloads
+        echo 'testing' > testing.html
+
+    - name: upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: assets-for-downloads
+        path: downloads 
+      

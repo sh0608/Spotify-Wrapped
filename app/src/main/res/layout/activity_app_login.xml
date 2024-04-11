@@ -90,7 +90,7 @@
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/roundbutton"
         android:fontFamily="@font/circular_spotifytext_bold"

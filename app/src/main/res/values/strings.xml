@@ -41,5 +41,7 @@
     <string name="password">Password</string>
     <string name="or_create_new_account">or create new account</string>
     <string name="login">Login</string>
+    <string name="new_username">New username</string>
+    <string name="new_password">New password</string>
 
 </resources>

@@ -9,7 +9,6 @@ subprojects {
     }
 }
 
-
 android {
     namespace 'com.example.spotifywrapped'
     compileSdkVersion 34

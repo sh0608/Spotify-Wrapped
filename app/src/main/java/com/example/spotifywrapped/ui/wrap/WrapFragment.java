@@ -50,7 +50,9 @@ public class WrapFragment extends Fragment {
     private FragmentWrapBinding  binding;
     private String topSongsList;
     private String topArtistsList;
+
     private TextView geminiResult;
+    private TextView geminiResultArtists;
 
     private WrapViewModel wrapViewModel;
 
@@ -123,6 +125,7 @@ public class WrapFragment extends Fragment {
                 wrapViewModel.updateArtistsList(artists);
                 List<String> newGenres = getTopGenres(artists);
                 wrapViewModel.updateGenresList(newGenres);
+                GeminiApiHelper.getResponseFromGeminiArtists(artists, wrapViewModel);
             }
 
             @Override
@@ -173,6 +176,14 @@ public class WrapFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 geminiResult.setText(s);
+            }
+        });
+
+        geminiResultArtists = binding.geminiResultTextViewArtists;
+        wrapViewModel.getGeminiResultArtists().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                geminiResultArtists.setText(s);
             }
         });
 

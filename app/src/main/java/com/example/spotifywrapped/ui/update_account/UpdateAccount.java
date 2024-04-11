@@ -65,11 +65,11 @@ public class UpdateAccount extends Fragment {
                 String newUsername = binding.changeUsernameEditText.getText().toString();
                 String newPassword = binding.changePasswordEditText.getText().toString();
                 Log.d("NEW USERNAME AND PASSWORD", newUsername + " " + newPassword);
-                if (newUsername != null) {
+                if (newUsername != null && !newUsername.equals("")) {
                     engine.setUsername(username, newUsername);
                     Log.d("SET THE USERNAME", newUsername + " " + newPassword);
                 }
-                if (newPassword != null) {
+                if (newPassword != null && !newPassword.equals("")) {
                     engine.setPassword(username, newPassword);
                     Log.d("SET THE PASSWORD", newUsername + " " + newPassword);
                 }

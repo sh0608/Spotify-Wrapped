@@ -6,6 +6,20 @@ plugins {
 }
 
 
+subprojects {
+    apply from:"checkstyle.gradle"
+    afterEvaluate {
+        preBuild.dependsOn('checkstyle')
+        check.dependsOn 'checkstyle'
+    }
+}
+
+checkstyle {
+    toolVersion = '8.29' // Use the Checkstyle version you prefer
+    config = rootProject.file('config/checkstyle/checkstyle.xml')
+    showViolations = true
+}
+
 android {
     namespace = "com.example.spotifywrapped"
     compileSdk = 34

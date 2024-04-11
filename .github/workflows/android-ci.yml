@@ -26,7 +26,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: checkstyle-report
-        path: app/build/reports/checkstyle/checkstyle.html
+        path: ./Spotify-Wrapped/app/build/reports/checkstyle/
 
     # - name: Run Gradle build
     #   run: ./gradlew build

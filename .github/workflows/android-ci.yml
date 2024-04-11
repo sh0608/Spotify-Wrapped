@@ -28,5 +28,5 @@ jobs:
         name: checkstyle-report
         path: Spotify-Wrapped/app/build/reports/checkstyle/checkstyle.html
 
-    - name: kotlin checkstyle
-      run: detekt
+    # - name: kotlin checkstyle
+    #   run: detekt

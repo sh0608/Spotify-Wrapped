@@ -59,7 +59,6 @@
         android:text="@string/change_username_or_email"
         android:textColor="@color/white"
 
-
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
         app:layout_constraintEnd_toEndOf="parent"

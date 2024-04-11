@@ -180,13 +180,14 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/exportAsImage"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="130dp"
                 android:layout_marginBottom="15dp"
+                android:padding="10dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:background="@drawable/button_toggle_selector"
+                style="@style/BUTTON"
 
                 android:text="@string/export_as_image" />
 

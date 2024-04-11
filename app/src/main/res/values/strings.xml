@@ -36,6 +36,6 @@
     <string name="one_month">One Month</string>
     <string name="six_months">Six Months</string>
     <string name="all_time">All Time</string>
-    <string name="export_as_image">Export As Image</string>
+    <string name="export_as_image">Export Wrapped As Image</string>
 
 </resources>

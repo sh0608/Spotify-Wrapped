@@ -46,7 +46,7 @@ jobs:
         name: assets-for-downloads
         path: downloads 
 
-    - name: upload artifact 2
+
     - run: mkdir -p $GITHUB_WORKSPACE
     - run: echo hello > $GITHUB_WORKSPACE/build.gradle
     - uses: actions/upload-artifact@v4

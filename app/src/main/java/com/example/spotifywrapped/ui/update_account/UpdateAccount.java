@@ -62,16 +62,14 @@ public class UpdateAccount extends Fragment {
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newUsername = binding.changeUsernameEditText.getText().toString();
+//                String newUsername = binding.changeUsernameEditText.getText().toString();
                 String newPassword = binding.changePasswordEditText.getText().toString();
-                Log.d("NEW USERNAME AND PASSWORD", newUsername + " " + newPassword);
-                if (newUsername != null && !newUsername.equals("")) {
-                    engine.setUsername(username, newUsername);
-                    Log.d("SET THE USERNAME", newUsername + " " + newPassword);
-                }
+//                if (newUsername != null && !newUsername.equals("")) {
+//                    engine.setUsername(username, newUsername);
+//                    Log.d("SET THE USERNAME", newUsername + " " + newPassword);
+//                }
                 if (newPassword != null && !newPassword.equals("")) {
                     engine.setPassword(username, newPassword);
-                    Log.d("SET THE PASSWORD", newUsername + " " + newPassword);
                 }
 
             }

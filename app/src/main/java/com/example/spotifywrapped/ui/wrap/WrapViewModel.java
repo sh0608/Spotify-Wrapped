@@ -12,7 +12,9 @@ import java.util.List;
 
 public class WrapViewModel extends ViewModel {
 
+
     private final MutableLiveData<String> geminiResult = new MutableLiveData<>();
+    private final MutableLiveData<String> geminiResultArtists = new MutableLiveData<>();
     private MutableLiveData<List<Song>> songsList = new MutableLiveData<>();
     private MutableLiveData<List<Artist>> artistsList = new MutableLiveData<>();
 
@@ -20,6 +22,7 @@ public class WrapViewModel extends ViewModel {
 
     public WrapViewModel() {
         geminiResult.setValue("");
+        geminiResultArtists.setValue("");
         songsList.setValue(new ArrayList<>());
         artistsList.setValue(new ArrayList<>());
         genresList.setValue(new ArrayList<>());
@@ -53,6 +56,15 @@ public class WrapViewModel extends ViewModel {
     public void updateGeminiResult(String text) {
 
         geminiResult.postValue(text);
+    }
+
+    public void updateGeminiResultArtists(String text) {
+
+        geminiResultArtists.postValue(text);
+    }
+
+    public LiveData<String> getGeminiResultArtists() {
+        return geminiResultArtists;
     }
 
     public LiveData<String> getGeminiResult() {

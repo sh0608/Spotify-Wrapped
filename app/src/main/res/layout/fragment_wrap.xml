@@ -64,6 +64,14 @@
             </LinearLayout>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wrapped Summarized"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:textSize="30sp"
+                style="@style/TEXT"/>
+
+            <TextView
                 android:id="@+id/geminiResultTextView"
                 style="@style/TEXT"
                 android:layout_width="match_parent"
@@ -73,6 +81,26 @@
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="gemini result"
                 android:textSize="20sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommended Artists"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:textSize="30sp"
+                style="@style/TEXT"/>
+
+            <TextView
+                android:id="@+id/geminiResultTextViewArtists"
+                style="@style/TEXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/circular_spotifytext_black"
+                android:text="gemini result artists"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/genres"

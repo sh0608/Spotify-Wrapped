@@ -20,7 +20,6 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Run Checkstyle
-      working-directory: ./Spotify-Wrapped
       run: gradle check --stacktrace
 
     # - name: Run Gradle build

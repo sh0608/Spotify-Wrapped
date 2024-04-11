@@ -22,5 +22,11 @@ jobs:
     - name: Run Checkstyle
       run: gradle check --stacktrace
 
+    - name: Upload Checkstyle Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: checkstyle-report
+        path: app/build/reports/checkstyle/checkstyle.html
+
     # - name: Run Gradle build
     #   run: ./gradlew build

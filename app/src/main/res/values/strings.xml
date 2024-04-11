@@ -36,5 +36,10 @@
     <string name="one_month">One Month</string>
     <string name="six_months">Six Months</string>
     <string name="all_time">All Time</string>
+    <string name="user_name">User name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="or_create_new_account">or create new account</string>
+    <string name="login">Login</string>
 
 </resources>

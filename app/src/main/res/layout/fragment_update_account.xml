@@ -36,16 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="244dp"
         android:fontFamily="@font/circular_spotifytext_bold"
         android:text="@string/update_account_info"
-        android:textSize="35sp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.616"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/change_username_button"
@@ -104,29 +103,27 @@
         android:id="@+id/changeUsernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:fontFamily="@font/circular_spotifytext_bold"
         android:hint="@string/new_username"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
+        app:layout_constraintTop_toBottomOf="@+id/update_login_textview" />
 
     <EditText
         android:id="@+id/changePasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:fontFamily="@font/circular_spotifytext_bold"
         android:hint="@string/new_password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintTop_toBottomOf="@+id/changeUsernameEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

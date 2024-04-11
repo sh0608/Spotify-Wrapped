@@ -1,14 +1,25 @@
 package com.example.spotifywrapped.ui.wrap;
 
+// <<<<<<< fixLogin3
 import android.content.Context;
 import android.content.SharedPreferences;
+// =======
+// import android.content.ContentResolver;
+// import android.content.ContentValues;
+// import android.content.Context;
+// import android.graphics.Bitmap;
+// import android.net.Uri;
+// >>>>>>> main
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +36,12 @@ import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.GeminiApiHelper;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
+import com.example.spotifywrapped.MainActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,11 +56,17 @@ public class WrapFragment extends Fragment {
     private FragmentWrapBinding  binding;
     private String topSongsList;
     private String topArtistsList;
+
     private TextView geminiResult;
+
+    private TextView geminiResultArtists;
+
+
     private WrapViewModel wrapViewModel;
     private Button btnShortTerm;
     private Button btnMediumTerm;
     private Button btnLongTerm;
+    private Button btnExportAsImage;
     private Button[] allButtons;
     private Engine engine;
     private SharedPreferences.Editor editor;
@@ -129,6 +152,7 @@ public class WrapFragment extends Fragment {
                 wrapViewModel.updateArtistsList(artists);
                 List<String> newGenres = getTopGenres(artists);
                 wrapViewModel.updateGenresList(newGenres);
+                GeminiApiHelper.getResponseFromGeminiArtists(artists, wrapViewModel);
             }
 
             @Override
@@ -182,17 +206,32 @@ public class WrapFragment extends Fragment {
             }
         });
 
+        geminiResultArtists = binding.geminiResultTextViewArtists;
+        wrapViewModel.getGeminiResultArtists().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                geminiResultArtists.setText(s);
+            }
+        });
+
 
 
         btnShortTerm = view.findViewById(R.id.btnShortTerm);
         btnMediumTerm = view.findViewById(R.id.btnMediumTerm);
         btnLongTerm = view.findViewById(R.id.btnLongTerm);
+        btnExportAsImage = view.findViewById(R.id.exportAsImage);
 
         allButtons = new Button[]{btnShortTerm, btnMediumTerm, btnLongTerm};
 
         btnShortTerm.setOnClickListener(v -> updateButtonStates(btnShortTerm));
         btnMediumTerm.setOnClickListener(v -> updateButtonStates(btnMediumTerm));
         btnLongTerm.setOnClickListener(v -> updateButtonStates(btnLongTerm));
+        btnExportAsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportScreenAsImage();
+            }
+        });
 
         // Set initial state
         updateButtonStates(btnShortTerm);
@@ -290,6 +329,60 @@ public class WrapFragment extends Fragment {
                 topArtistsList =  "Error loading top artists: " + errorMessage;
             }
         }, selectedTimeFrame);
+    }
+
+    // Method to capture screenshot of a view
+    private Bitmap captureScreenshot(View view) {
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    private void exportScreenAsImage() {
+        View rootView = requireActivity().getWindow().getDecorView().getRootView(); // Get root view of the activity
+        btnExportAsImage.setEnabled(false); // Disable the button to prevent multiple clicks
+
+        Bitmap screenshotBitmap = captureScreenshot(rootView);
+
+        // Save the bitmap to the Photos app
+        Uri savedUri = saveBitmapToPhotos(screenshotBitmap);
+        if (savedUri != null) {
+            // Show a success message or perform any additional actions
+            Toast.makeText(requireContext(), "Screenshot saved to Photos app", Toast.LENGTH_SHORT).show();
+        } else {
+            // Show an error message or handle the failure case
+            Toast.makeText(requireContext(), "Failed to save screenshot", Toast.LENGTH_SHORT).show();
+        }
+
+        btnExportAsImage.setEnabled(true); // Re-enable the button
+    }
+
+    private Uri saveBitmapToPhotos(Bitmap bitmap) {
+        Context context = requireContext().getApplicationContext();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, "Screenshot_" + System.currentTimeMillis() + ".jpg");
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        contentValues.put(MediaStore.Images.Media.WIDTH, bitmap.getWidth());
+        contentValues.put(MediaStore.Images.Media.HEIGHT, bitmap.getHeight());
+
+        ContentResolver resolver = context.getContentResolver();
+        Uri uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+        if (uri != null) {
+            try {
+                OutputStream outputStream = resolver.openOutputStream(uri);
+                if (outputStream != null) {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return uri;
     }
 
     @Override

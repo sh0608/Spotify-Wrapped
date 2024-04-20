@@ -39,8 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="5dp"
-                    android:fontFamily="@font/circular_spotifytext_black"
-                    android:background="@drawable/button_toggle_selector"
+                    android:fontFamily="@font/circular_spotifytext_medium"
+                    android:background="@drawable/gradient_wrapped_one_month"
+                    android:textColor="@color/white"
                     android:text="@string/one_month" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -49,8 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-                    android:fontFamily="@font/circular_spotifytext_black"
-                    android:background="@drawable/button_toggle_selector"
+                    android:textColor="@color/white"
+                    android:background="@drawable/gradient_wrapped_sixmonth"
 
                     android:text="@string/six_months" />
 
@@ -58,8 +59,9 @@
                     android:id="@+id/btnLongTerm"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/circular_spotifytext_black"
-                    android:background="@drawable/button_toggle_selector"
+                    android:fontFamily="@font/circular_spotifytext_medium"
+                    android:background="@drawable/gradient_wrapped_alltime"
+                    android:textColor="@color/white"
                     android:text="@string/all_time" />
             </LinearLayout>
 
@@ -78,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/circular_spotifytext_black"
+                android:fontFamily="@font/circular_spotifytext_book"
+                android:lineSpacingExtra="8sp"
                 android:text="gemini result"
                 android:textSize="20sp" />
 
@@ -98,14 +101,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/circular_spotifytext_black"
-                android:text="gemini result artists"
+                android:fontFamily="@font/circular_spotifytext_book"
+                android:lineSpacingExtra="8sp"
+                android:text="gemini result artists blahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
                 android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/genres"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_genres"
                 style="@style/TEXT"
@@ -118,7 +122,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/genreList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 style="@style/SCREEN_BACKGROUND"
                 app:layout_constraintBottom_toTopOf="@+id/nav_view"
@@ -185,6 +189,7 @@
                 android:layout_marginLeft="125dp"
                 android:layout_marginBottom="15dp"
                 android:padding="10dp"
+                android:textSize="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:background="@drawable/button_toggle_selector"
                 style="@style/BUTTON"

@@ -64,7 +64,7 @@
             <TextView
                 android:id="@+id/topSongs_onemonth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_songs"
@@ -78,7 +78,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoriteSongList_onemonth"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

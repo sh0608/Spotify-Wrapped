@@ -2,53 +2,21 @@ package com.example.spotifywrapped;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
-import android.widget.LinearLayout;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
 import com.example.spotifywrapped.databinding.ActivityMainBinding;
-import com.example.spotifywrapped.ui.SpotifyApiHelper;
-import com.example.spotifywrapped.ui.history.HistoryFragment;
-import com.example.spotifywrapped.ui.wrap.TopSongAdapter;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-
-import com.example.spotifywrapped.ui.history.HistoryFragment;
-import com.example.spotifywrapped.ui.history.HistoryOneMonth;
-import com.example.spotifywrapped.ui.history.HistoryOneMonthViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-
-import org.json.JSONException;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
     private Switch theme_switch;
-    private Button button_month;
     SharedPreferences sharedPreferences = null;
 
     @SuppressLint("ResourceType")
@@ -56,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.spotifywrapped.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
@@ -73,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // THEME SWITCHER SETUP
         theme_switch = findViewById(R.id.switch_theme);
         sharedPreferences = getSharedPreferences("night", 0);
-        Boolean switch_theme_flag = sharedPreferences.getBoolean("night_mode", true);
+        boolean switch_theme_flag = sharedPreferences.getBoolean("night_mode", true);
         if (switch_theme_flag) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             theme_switch.setChecked(true);

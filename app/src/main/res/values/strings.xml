@@ -45,7 +45,7 @@
     <string name="new_username">New username</string>
     <string name="new_password">New password</string>
 
-    <string name="export_as_image">Export Wrapped As Image</string>
+    <string name="export_as_image">Export as image</string>
 
 
 </resources>

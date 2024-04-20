@@ -1,17 +1,12 @@
 package com.example.spotifywrapped.ui.wrap;
 
-// <<<<<<< fixLogin3
 import android.content.Context;
 import android.content.SharedPreferences;
-// =======
- import android.content.ContentResolver;
- import android.content.ContentValues;
- import android.content.Context;
- import android.graphics.Bitmap;
- import android.net.Uri;
-// >>>>>>> main
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,17 +31,11 @@ import com.example.spotifywrapped.databinding.FragmentWrapBinding;
 import com.example.spotifywrapped.ui.GeminiApiHelper;
 import com.example.spotifywrapped.ui.SpotifyApiHelper;
 import com.example.spotifywrapped.ui.TokenManager;
-import com.example.spotifywrapped.MainActivity;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +43,6 @@ import java.util.Map;
 public class WrapFragment extends Fragment {
 
     private FragmentWrapBinding  binding;
-    private String topSongsList;
-    private String topArtistsList;
 
     private TextView geminiResult;
 
@@ -145,10 +132,6 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
             @Override
             public void onArtistsLoaded(List<Artist> artists) {
-                topArtistsList = "";
-                for (Artist artist : artists) {
-                    topArtistsList += artist.getName() + "\n";
-                }
                 wrapViewModel.updateArtistsList(artists);
                 List<String> newGenres = getTopGenres(artists);
                 wrapViewModel.updateGenresList(newGenres);
@@ -159,7 +142,7 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
-                topArtistsList =  "Error loading top artists: " + errorMessage;
+                String topArtistsList =  "Error loading top artists: " + errorMessage;
             }
         }, SpotifyApiHelper.TimeFrame.SHORT);
 
@@ -182,10 +165,6 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                topSongsList = "";
-                for (Song song : songs) {
-                    topSongsList += song.getName() + "\n";
-                }
                 wrapViewModel.updateSongsList(songs);
                 GeminiApiHelper.getResponseFromGemini(songs, wrapViewModel);
             }
@@ -194,25 +173,14 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
-                topSongsList = "Error loading top songs: " + errorMessage;
             }
         });
 
         geminiResult = binding.geminiResultTextView;
-        wrapViewModel.getGeminiResult().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                geminiResult.setText(s);
-            }
-        });
+        wrapViewModel.getGeminiResult().observe(getViewLifecycleOwner(), s -> geminiResult.setText(s));
 
         geminiResultArtists = binding.geminiResultTextViewArtists;
-        wrapViewModel.getGeminiResultArtists().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                geminiResultArtists.setText(s);
-            }
-        });
+        wrapViewModel.getGeminiResultArtists().observe(getViewLifecycleOwner(), s -> geminiResultArtists.setText(s));
 
 
 
@@ -226,12 +194,7 @@ public class WrapFragment extends Fragment {
         btnShortTerm.setOnClickListener(v -> updateButtonStates(btnShortTerm));
         btnMediumTerm.setOnClickListener(v -> updateButtonStates(btnMediumTerm));
         btnLongTerm.setOnClickListener(v -> updateButtonStates(btnLongTerm));
-        btnExportAsImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                exportScreenAsImage();
-            }
-        });
+        btnExportAsImage.setOnClickListener(v -> exportScreenAsImage());
 
         // Set initial state
         updateButtonStates(btnShortTerm);
@@ -294,10 +257,6 @@ public class WrapFragment extends Fragment {
         SpotifyApiHelper.getUserTopSongs(token, new SpotifyApiHelper.OnSongsLoadedListener() {
             @Override
             public void onSongsLoaded(List<Song> songs) {
-                topSongsList = "";
-                for (Song song : songs) {
-                    topSongsList += song.getName() + "\n";
-                }
                 wrapViewModel.updateSongsList(songs);
                 GeminiApiHelper.getResponseFromGemini(songs, wrapViewModel);
             }
@@ -306,17 +265,12 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top songs: " + errorMessage);
-                topSongsList = "Error loading top songs: " + errorMessage;
             }
         }, selectedTimeFrame);
 
         SpotifyApiHelper.getUserTopArtists(token, new SpotifyApiHelper.OnArtistsLoadedListener() {
             @Override
             public void onArtistsLoaded(List<Artist> artists) {
-                topArtistsList = "";
-                for (Artist artist : artists) {
-                    topArtistsList += artist.getName() + "\n";
-                }
                 wrapViewModel.updateArtistsList(artists);
                 List<String> newGenres = getTopGenres(artists);
                 wrapViewModel.updateGenresList(newGenres);
@@ -326,7 +280,6 @@ public class WrapFragment extends Fragment {
             public void onError(String errorMessage) {
                 // Handle the error here
                 Log.e("SpotifyApiHelper", "Error loading top artists: " + errorMessage);
-                topArtistsList =  "Error loading top artists: " + errorMessage;
             }
         }, selectedTimeFrame);
     }

@@ -78,7 +78,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/favoriteSongList_alltime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -102,7 +102,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/topArtistsList_alltime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/topSongs_alltime"
                 app:layout_constraintEnd_toEndOf="parent"

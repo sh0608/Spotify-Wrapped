@@ -133,8 +133,6 @@ public class WrapFragment extends Fragment {
             @Override
             public void onArtistsLoaded(List<Artist> artists) {
                 wrapViewModel.updateArtistsList(artists);
-                List<String> newGenres = getTopGenres(artists);
-                wrapViewModel.updateGenresList(newGenres);
                 GeminiApiHelper.getResponseFromGeminiArtists(artists, wrapViewModel);
             }
 
@@ -153,12 +151,9 @@ public class WrapFragment extends Fragment {
         topSongsRecyclerView.setAdapter(topSongAdapter);
 
         //  onChanged listener for Top Songs
-        wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), new Observer<List<Song>>() {
-            @Override
-            public void onChanged(List<Song> songs) {
-                topSongAdapter.notifyDataSetChanged();
-                topSongAdapter.setTopSongs(songs);
-            }
+        wrapViewModel.getSongsList().observe(getViewLifecycleOwner(), songs -> {
+            topSongAdapter.notifyDataSetChanged();
+            topSongAdapter.setTopSongs(songs);
         });
 
         // Call the getUserTopSongs method and pass the access token and a listener
@@ -178,10 +173,8 @@ public class WrapFragment extends Fragment {
 
         geminiResult = binding.geminiResultTextView;
         wrapViewModel.getGeminiResult().observe(getViewLifecycleOwner(), s -> geminiResult.setText(s));
-
         geminiResultArtists = binding.geminiResultTextViewArtists;
         wrapViewModel.getGeminiResultArtists().observe(getViewLifecycleOwner(), s -> geminiResultArtists.setText(s));
-
 
 
         btnShortTerm = view.findViewById(R.id.btnShortTerm);
@@ -198,8 +191,6 @@ public class WrapFragment extends Fragment {
 
         // Set initial state
         updateButtonStates(btnShortTerm);
-
-
     }
 
 

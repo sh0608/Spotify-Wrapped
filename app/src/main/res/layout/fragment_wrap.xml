@@ -147,6 +147,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/nav_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -176,6 +177,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -186,6 +188,7 @@
                 style="@style/TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/circular_spotifytext_black"
                 android:text="@string/top_artists"
@@ -202,6 +205,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/topSongs"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -211,16 +215,17 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/exportAsImage"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="125dp"
-                android:layout_marginBottom="15dp"
-                android:padding="10dp"
-                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:layout_marginStart="110dp"
+                android:layout_marginEnd="110dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/gradient_wrapped_alltime"
                 android:fontFamily="@font/circular_spotifytext_black"
-                android:background="@drawable/button_toggle_selector"
-                style="@style/BUTTON"
-                android:text="@string/export_as_image" />
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:text="@string/export_as_image"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </ScrollView>

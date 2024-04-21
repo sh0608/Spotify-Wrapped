@@ -64,7 +64,7 @@ public class GeminiApiHelper {
             @Override
             public void onSuccess(GenerateContentResponse result) {
                 wrapViewModel.updateGeminiResultArtists(result.getText());
-                Log.d("THE SHIT IS WORKING", result.getText());
+                Log.d("WORKING", result.getText());
             }
 
             @Override

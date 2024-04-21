@@ -48,13 +48,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation files('../spotify-app-remote-release-0.8.0.aar')
     implementation files('../spotify-auth-release-2.1.0.aar')
     implementation 'androidx.browser:browser:1.8.0'
 
-    implementation 'com.google.ai.client.generativeai:generativeai:0.2.2'
+    implementation 'com.google.ai.client.generativeai:generativeai:0.4.0'
 
     implementation 'com.google.guava:guava:31.0.1-android'
 
@@ -81,5 +81,5 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:32.8.0')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-firestore:24.11.0'
+    implementation 'com.google.firebase:firebase-firestore:24.11.1'
 }

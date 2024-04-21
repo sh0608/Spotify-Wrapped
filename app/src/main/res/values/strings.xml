@@ -33,8 +33,8 @@
     <string name="_1_month_wrapped">Past Month</string>
     <string name="_6_months_wrapped">Past 6 Months</string>
     <string name="all_time_wrapped">All-time</string>
-    <string name="one_month">One Month</string>
-    <string name="six_months">Six Months</string>
+    <string name="one_month">1 Month</string>
+    <string name="six_months">6 Months</string>
     <string name="all_time">All Time</string>
 
     <string name="user_name">User name</string>
@@ -45,7 +45,8 @@
     <string name="new_username">New username</string>
     <string name="new_password">New password</string>
 
-    <string name="export_as_image">Export Wrapped As Image</string>
+    <string name="export_as_image">Export as image</string>
+    <string name="wrapped_summarized">Wrapped Summarized</string>
 
 
 </resources>
